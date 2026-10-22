@@ -1,6 +1,6 @@
 # Momoka 官网
 
-Momoka 的官方介绍站点。Momoka 是面向 Windows 的原生媒体库客户端，使用 WinUI 3 与 libmpv，支持 Emby、Jellyfin、飞牛影视与 Plex。
+Momoka 的官方介绍与下载指引站。说明 Windows 原生界面、libmpv 播放、字幕与版本筛选、多账号聚合和可选 MoviePilot 集成，并分别标注 Emby、Jellyfin、飞牛影视与 Plex 的支持范围。
 
 - 主项目：[cudamin/Momoka](https://github.com/cudamin/Momoka)
 - 站点是纯静态 HTML/CSS/JavaScript，可以直接部署到 Cloudflare Pages，也可以放进任意 Nginx 容器。
@@ -27,6 +27,28 @@ Momoka-site/
 cp index.html styles.css main.js dist/
 cp -r assets/* dist/assets/
 ```
+
+## 本地预览与文案检查
+
+使用 Node.js 内置测试运行器，无需额外安装依赖：
+
+```bash
+node --test tests/site-copy.test.mjs
+```
+
+检查覆盖源文件与 `dist/` 一致性、页面结构、可点击功能目录、兼容性卡片与首次使用步骤、资源与锚点、下载与项目链接、服务端验证边界、字幕默认行为，以及可选组件和隐私表述。检查工具自身也包含错误文案、坏链接与部署文件漂移的失败场景。
+
+Windows 本地预览（需要 Python）：
+
+```powershell
+py -m http.server 8080 --bind 127.0.0.1 --directory dist
+```
+
+浏览器打开 `http://127.0.0.1:8080/`，修改文件后刷新。部署前仍需查看桌面和窄屏排版，不能仅用内容检查代替视觉检查。
+
+### GitHub 仓库简介建议
+
+> Momoka 官网：Windows 原生媒体库客户端的功能介绍、服务端兼容性与下载指引，支持 Cloudflare Pages / Workers 部署。
 
 ## 飞牛 Docker 部署
 

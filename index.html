@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Momoka — 原生 WinUI 3 媒体库客户端</title>
-    <meta name="description" content="Momoka 是面向 Windows 的第三方媒体库客户端：原生 WinUI 3 界面与 libmpv 播放内核，支持 Emby、Jellyfin、飞牛影视与 Plex，内置着色器链、字幕与版本优先级、MoviePilot 集成与多账号聚合。">
+    <title>Momoka — Windows 原生媒体库客户端</title>
+    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，提供画质调节、字幕与版本筛选、多账号聚合和可选 MoviePilot 集成。可接入 Emby、Jellyfin、飞牛影视与 Plex，支持范围因服务端而异。">
     <meta name="theme-color" content="#060a07">
-    <meta property="og:title" content="Momoka — 原生 WinUI 3 媒体库客户端">
-    <meta property="og:description" content="把 Emby、Jellyfin、飞牛影视与 Plex 的片库收进同一块屏幕。原生 WinUI 3 界面，libmpv 播放内核，画质、字幕和版本都按你的优先级来。">
+    <meta property="og:title" content="Momoka — Windows 原生媒体库客户端">
+    <meta property="og:description" content="在 Windows 桌面浏览自己的片库，用 libmpv 播放，按偏好选择画质、字幕和版本。支持多账号聚合与可选 MoviePilot 集成，各服务端的支持范围见官网说明。">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="assets/app-icon.png">
     <link rel="apple-touch-icon" href="assets/app-icon.png">
@@ -35,7 +35,7 @@
             <nav class="site-nav" aria-label="主导航">
                 <a href="#player">播放</a>
                 <a href="#interface">界面</a>
-                <a href="#servers">服务端</a>
+                <a href="#servers">兼容性</a>
                 <a href="#download">下载</a>
             </nav>
             <a class="button button-small button-primary" href="#download">获取 Momoka</a>
@@ -46,26 +46,27 @@
         <section class="hero" id="top" aria-labelledby="hero-title">
             <div class="wrap hero-inner">
                 <div class="hero-copy">
-                    <h1 id="hero-title" class="sr-only">Momoka — 原生 WinUI 3 媒体库客户端</h1>
+                    <h1 id="hero-title" class="sr-only">Momoka — Windows 原生媒体库客户端</h1>
                     <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Windows · WinUI 3 · libmpv</p>
-                    <p class="lede">Momoka 是为 Windows 打造的原生媒体库客户端。原生 WinUI 3 界面、libmpv 播放内核，把 Emby、Jellyfin、飞牛影视与 Plex 的片库收进同一块屏幕——画质、字幕和版本，都按你的优先级来。</p>
+                    <p class="lede">Momoka 以原生 WinUI 3 界面连接你的媒体服务器，用 libmpv 播放。画质、字幕和版本按偏好设置，多服务器、多账号也能集中浏览。</p>
+                    <p class="hero-compatibility">Emby · Jellyfin · 飞牛影视 · Plex <a href="#servers">查看支持范围 <span aria-hidden="true">↗</span></a></p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="https://apps.microsoft.com/detail/9nqjl7k0h8x0?hl=zh-CN&gl=CN" target="_blank" rel="noopener noreferrer">
-                            从微软商店安装
+                            从 Microsoft Store 安装
                             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
-                        <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub Releases</a>
+                        <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">从 GitHub 下载</a>
                     </div>
                     <ul class="hero-meta">
                         <li>Windows 10 1809+ · 仅 x64</li>
                         <li>MIT 开源</li>
-                        <li><a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">不收集数据</a></li>
+                        <li><a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">无广告 · 无追踪</a></li>
                     </ul>
                 </div>
 
                 <figure class="hero-visual">
                     <div class="hero-frame">
-                        <img src="assets/hero.webp" srcset="assets/hero-800.webp 800w, assets/hero.webp 1400w" sizes="(max-width: 960px) 92vw, 46vw" width="1400" height="726" alt="墨绿色调的主视觉插画：半透明的白色花瓣叠成一枚发光的播放符号。" fetchpriority="high">
+                        <img src="assets/hero.webp" srcset="assets/hero-800.webp 800w, assets/hero.webp 1400w" sizes="(max-width: 960px) 92vw, 46vw" width="1400" height="726" alt="Momoka 主视觉插画：墨绿背景上，半透明花瓣组成发光的播放符号。" fetchpriority="high">
                         <span class="hero-chip hero-chip-top">原生 WinUI 3</span>
                         <span class="hero-chip hero-chip-bottom">libmpv 播放内核</span>
                     </div>
@@ -74,11 +75,11 @@
 
             <div class="wrap">
                 <ul class="hero-strip" aria-label="功能概览">
-                    <li>着色器链</li>
-                    <li>多账号聚合</li>
-                    <li>字幕优先级</li>
-                    <li>版本优先级</li>
-                    <li>MoviePilot</li>
+                    <li><a href="#player">画质调节 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#aggregation">多账号聚合 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#subtitles">字幕偏好 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#versions">版本筛选 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#moviepilot">MoviePilot 集成 <span aria-hidden="true">↗</span></a></li>
                 </ul>
             </div>
         </section>
@@ -88,45 +89,42 @@
                 <h2 id="player-title" class="sr-only">播放</h2>
                 <div class="section-head section-head-solo reveal">
                     <div>
-                        <p class="eyebrow">01 / 播放</p>
-                        <p class="section-lede">Momoka 用 libmpv 播放，WinUI 3 负责外壳。把真正影响观看的三件事——画质、字幕和版本——在按下播放之前就处理好。</p>
+                        <p class="eyebrow">播放体验</p>
+                        <p class="section-lede">用 libmpv 播放，把画质、字幕与版本的选择留给你。按片源调整处理方式，按偏好挑选字幕和视频版本，少一点开播后的反复设置。</p>
                     </div>
                 </div>
 
                 <div class="player-grid">
-                    <ol class="feature-list">
+                    <ul class="feature-list">
                         <li class="reveal">
-                            <span class="feature-num">01</span>
                             <div>
-                                <h3>着色器链，按片源和显卡自动选</h3>
-                                <p>随包内置 ArtCNN、ravu、CfL、SSimDownscaler 等着色器，按放大倍数、真人／动画与显卡档自动挑一条链，四个倍数档都做色度重建。也能手动锁定档位、自动识别动画，并修复老片源。</p>
+                                <h3>画质处理，按片源匹配</h3>
+                                <p>启用着色器后，根据画面缩放比例、真人或动画类型，以及所选显卡档位匹配处理链。内置 ArtCNN、ravu、CfL、SSimDownscaler 等，也可手动选择档位。</p>
                             </div>
                         </li>
-                        <li class="reveal">
-                            <span class="feature-num">02</span>
+                        <li class="reveal" id="subtitles">
                             <div>
-                                <h3>字幕按你的优先级来</h3>
-                                <p>为字幕设置自定义优先级，默认排除繁体中文，优先双语字幕与特效字幕。不用每次开播后再翻菜单。</p>
+                                <h3>字幕选择，记住你的偏好</h3>
+                                <p>按语言和字幕标题设置优先级。默认优先简体中文，其次匹配其他中文字幕；双语、特效等关键词可按需设为优先或候补，不必每次开播重新挑选。</p>
                             </div>
                         </li>
-                        <li class="reveal">
-                            <span class="feature-num">03</span>
+                        <li class="reveal" id="versions">
                             <div>
-                                <h3>版本按入库顺序和组名来</h3>
-                                <p>视频版本支持自定义优先级，默认优先播放最后入库的版本，也可以按发布组筛选。聚合模式下，同一部片还能在不同服务器的版本之间切换。</p>
+                                <h3>同一部片，优先播放想看的版本</h3>
+                                <p>可按入库时间排序，也可按文件名中的发布组等关键词设置优先级。默认将新入库版本排在前面；开启聚合模式后，还能选择同一部影视在不同服务器上的版本。</p>
                             </div>
                         </li>
-                    </ol>
+                    </ul>
 
                     <aside class="pipeline reveal" aria-label="着色器选择方式示意">
                         <div class="pipeline-head">
-                            <span class="mono-label">SHADER PIPELINE</span>
+                            <span class="mono-label">着色器匹配示意</span>
                             <span class="mini-badge">自动匹配</span>
                         </div>
                         <div class="pipeline-rows">
                             <div class="pipeline-row">
-                                <span class="pipeline-key">放大倍数</span>
-                                <span class="pipeline-value">四档自适应</span>
+                                <span class="pipeline-key">缩放比例</span>
+                                <span class="pipeline-value">四档匹配</span>
                             </div>
                             <div class="pipeline-row">
                                 <span class="pipeline-key">片源类型</span>
@@ -134,14 +132,14 @@
                             </div>
                             <div class="pipeline-row">
                                 <span class="pipeline-key">显卡档位</span>
-                                <span class="pipeline-value">自动匹配，可手动指定</span>
+                                <span class="pipeline-value">按性能选择档位</span>
                             </div>
                             <div class="pipeline-row pipeline-output">
                                 <span class="pipeline-key">输出</span>
-                                <span class="pipeline-value">一条匹配的着色链 · 全档色度重建</span>
+                                <span class="pipeline-value">匹配的着色器链 · 色度重建</span>
                             </div>
                         </div>
-                        <p class="pipeline-note">画质预设与着色器互不影响：关掉着色器，画质完全交给 mpv 自己的预设；开着时，预设也照样生效。</p>
+                        <p class="pipeline-note">着色器可单独开启或关闭，不会改写画质预设。实际效果与性能开销取决于片源、显卡和所选档位。</p>
                     </aside>
                 </div>
             </div>
@@ -151,20 +149,20 @@
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
-                        <p class="eyebrow">02 / 界面</p>
-                        <h2 id="interface-title">五套深色配色主题</h2>
+                        <p class="eyebrow">原生界面</p>
+                        <h2 id="interface-title">五套深色主题</h2>
                     </div>
-                    <p class="section-lede">原生 WinUI 3 界面，内置 UI 动画；首页有轮播图，侧栏可以收起。五套深色主题不只是换个色相——正文与背景的对比度都过了 4.5:1。</p>
+                    <p class="section-lede">墨绿、纯黑、午夜、石墨、紫夜，五套深色主题配合原生 WinUI 3 动画与可收起侧栏。首页轮播展示片库内容，让浏览和切换保持连贯。</p>
                 </div>
 
                 <div class="interface-grid">
-                    <div class="theme-preview reveal" data-theme="forest" aria-label="当前主题的配色样本">
+                    <div class="theme-preview reveal" data-theme="forest" aria-label="Momoka 深色主题配色示意">
                         <div class="preview-bar">
                             <span class="preview-brand">
                                 <img src="assets/app-icon.png" alt="" width="18" height="18">
                                 MOMOKA
                             </span>
-                            <span class="preview-tag">配色样本</span>
+                            <span class="preview-tag">配色示意</span>
                         </div>
                         <div class="preview-body">
                             <div class="preview-rail" aria-hidden="true">
@@ -174,9 +172,9 @@
                                 <i></i>
                             </div>
                             <div class="preview-content">
-                                <p class="preview-kicker">DARK THEME</p>
+                                <p class="preview-kicker">深色主题</p>
                                 <p class="preview-headline">当前主题：<strong id="theme-name">墨绿</strong></p>
-                                <p class="preview-text">海报、剧照与正文在同一套深色底上保持清晰。侧栏收起后，只留一列图标；动画负责过渡，不抢内容。</p>
+                                <p class="preview-text">以深色背景衬托海报、剧照和正文。收起侧栏时保留图标导航，把更多空间留给片库。</p>
                                 <span class="preview-action" aria-hidden="true">播放</span>
                             </div>
                         </div>
@@ -206,7 +204,7 @@
                                 <span>紫夜</span>
                             </button>
                         </div>
-                        <p class="theme-note">这是本站按 Momoka 五套深色主题制作的配色样本，不是应用截图。点选会同时切换本站强调色。</p>
+                        <p class="theme-note">此处为主题配色示意，并非应用截图。选择主题会同步切换本站强调色。</p>
                         <p class="sr-only" role="status" id="theme-status">当前主题：墨绿</p>
                     </div>
                 </div>
@@ -217,10 +215,10 @@
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
-                        <p class="eyebrow">03 / 服务端</p>
-                        <h2 id="servers-title">支持情况</h2>
+                        <p class="eyebrow">媒体服务器</p>
+                        <h2 id="servers-title">媒体服务器支持情况</h2>
                     </div>
-                    <p class="section-lede">Momoka 支持多个媒体服务器，但成熟度并不一样。这里如实标出验证边界，避免把「已适配」说成「已验证」。</p>
+                    <p class="section-lede">可接入 Emby、Jellyfin、飞牛影视与 Plex。不同服务端的适配进度和验证范围不同，连接前请先查看对应说明。</p>
                 </div>
 
                 <div class="server-grid">
@@ -230,87 +228,100 @@
                             <span class="state state-primary">主要支持</span>
                         </div>
                         <p class="server-version">4.10.x</p>
-                        <p class="server-copy">媒体库浏览、播放与播放记录上报走 Emby 协议，是当前的主力使用场景。</p>
-                        <p class="server-meta">系统要求：Emby 4.10.x</p>
+                        <p class="server-copy">当前主要支持的服务端，可浏览媒体库、播放影片并同步观看进度。</p>
+                        <div class="server-footer">
+                            <p class="server-meta">版本要求：Emby 4.10.x</p>
+                            <a class="server-link" aria-label="Emby 支持说明" href="https://github.com/cudamin/Momoka/blob/master/README.md#系统要求" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
+                        </div>
                     </article>
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>Jellyfin</h3>
-                            <span class="state state-partial">部分验证</span>
+                            <span class="state state-partial">离线适配</span>
                         </div>
-                        <p class="server-version">协议 / 离线界面</p>
-                        <p class="server-copy">协议与离线界面已完成适配；真实服务器上的播放、写入和网页控制台登录尚未验证。</p>
-                        <p class="server-meta">实服播放与写入：未验证</p>
+                        <p class="server-version">协议与离线界面适配</p>
+                        <p class="server-copy">已完成协议与离线界面适配；真实服务器上的播放、写入及网页控制台登录尚未验证。</p>
+                        <div class="server-footer">
+                            <p class="server-meta">真实服务器关键功能：未验证</p>
+                            <a class="server-link" aria-label="Jellyfin 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/Jellyfin支持.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
+                        </div>
                     </article>
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>飞牛影视</h3>
-                            <span class="state state-partial">部分验证</span>
+                            <span class="state state-partial">前端核对</span>
                         </div>
                         <p class="server-version">网页 0.9.8 · 服务 0.8.43</p>
-                        <p class="server-copy">按官方前端核对；当前原画适配的实际播放尚未验证。版本号是核对记录，不是全版本兼容保证。</p>
-                        <p class="server-meta">原画实播：未验证</p>
+                        <p class="server-copy">已按官方前端核对接口。当前原画播放尚未实测；所列版本仅为核对记录，不代表所有版本均兼容。</p>
+                        <div class="server-footer">
+                            <p class="server-meta">真实原画播放：未验证</p>
+                            <a class="server-link" aria-label="飞牛影视 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/飞牛影视.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
+                        </div>
                     </article>
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>Plex</h3>
                             <span class="state state-experimental">实验性</span>
                         </div>
-                        <p class="server-version">协议 / 离线测试</p>
-                        <p class="server-copy">只做了协议与离线测试适配，没有对任何真实 Plex 服务器核对。连接、浏览与播放行为未经证实。</p>
-                        <p class="server-meta">真实服务器：未核对</p>
+                        <p class="server-version">协议与离线测试适配</p>
+                        <p class="server-copy">已完成协议与离线测试适配，但尚未连接真实 Plex 服务器核对。实际连接、浏览和播放仍需验证。</p>
+                        <div class="server-footer">
+                            <p class="server-meta">真实服务器：未核对</p>
+                            <a class="server-link" aria-label="Plex 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/Plex支持.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
+                        </div>
                     </article>
                 </div>
 
-                <div class="aggregate reveal">
+                <div class="aggregate reveal" id="aggregation">
                     <div>
-                        <h3>聚合模式</h3>
-                        <p>默认只让一台服务器、一个账号在线；打开聚合模式后，多台服务器与多个账号可以同时在线，主页和账号菜单会跟着改变。</p>
+                        <h3>多服务器、多账号，一起浏览</h3>
+                        <p>开启聚合模式后，可同时登录多台服务器和多个账号，在主页集中浏览片库与最近添加。也可以保持默认的单服务器、单账号模式。</p>
                         <p class="aggregate-note">聚合模式默认关闭，可在「设置 → 服务器」中打开。</p>
                     </div>
                     <ul class="aggregate-list">
                         <li>
-                            <span>主页</span>
-                            <p>媒体库列表与各库「最近添加」覆盖全部在线账号；两个及以上账号时，继续观看与库名旁会标出服务器名。</p>
+                            <span>片库</span>
+                            <p>媒体库和「最近添加」汇总全部在线账号；两个及以上账号在线时，继续观看和库名旁会标注服务器名称。</p>
                         </li>
                         <li>
                             <span>账号</span>
-                            <p>账号菜单改为「添加服务器／添加账号」，登录另一台服务器不再顶掉当前来源，已保存的凭据保留。</p>
+                            <p>使用「添加服务器／添加账号」保留当前连接；默认模式下切换来源，已保存的凭据也不会丢失。</p>
                         </li>
                         <li>
                             <span>版本</span>
-                            <p>同一部影视的版本选择里，可以挑选不同服务器的版本，不用先切换服务器。</p>
+                            <p>详情页可选择同一部影视在不同服务器上的版本，无需先切换服务器。</p>
                         </li>
                     </ul>
                 </div>
 
                 <div class="aside-grid">
-                    <article class="aside-card reveal">
-                        <p class="eyebrow">MoviePilot · 3.x.x</p>
-                        <h3>播放和订阅，在一个窗口里。</h3>
-                        <p>通过 MoviePilot API 内置手动整理、搜索不同版本等快捷键；主页最下方接入网页端订阅列表，播放与订阅不用来回切页面。</p>
+                    <article class="aside-card reveal" id="moviepilot">
+                        <p class="eyebrow">MoviePilot · 可选集成</p>
+                        <h3>搜索与订阅，放在同一个窗口</h3>
+                        <p>连接你自己的 MoviePilot 3.x.x 服务，即可在 Momoka 中搜索资源、管理订阅和手动整理；主页也能查看订阅列表。此功能可选，需要单独配置。</p>
                     </article>
                     <article class="aside-card reveal">
                         <p class="eyebrow">服务端界面</p>
-                        <h3>各家的控制台，各归各家。</h3>
-                        <p>只有一台服务器在线时，使用它自己的界面；多台在线时，设置左栏按服务器折叠分组。没有库管理权限的服务器或账号，不显示管理入口。</p>
+                        <h3>管理入口，按服务端和权限显示</h3>
+                        <p>单服务器在线时使用对应界面，多服务器在线时按来源分组。Emby、Jellyfin 和飞牛影视的管理入口按各自能力与账号权限显示；Plex 不提供管理入口。</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section class="section section-toned" id="download" aria-label="下载">
+        <section class="section section-toned" id="download" aria-labelledby="download-title">
             <div class="wrap">
                 <div class="download-card reveal">
                     <div class="download-copy">
-                        <p class="eyebrow">04 / 下载</p>
-                        <p class="download-lede">Momoka 已在 Microsoft Store 上架，也可以从 GitHub Releases 获取最新的 x64 安装包。</p>
+                        <p class="eyebrow">Windows · x64</p>
+                        <h2 id="download-title">下载 Momoka</h2>
+                        <p class="download-lede">从 Microsoft Store 安装，或在 GitHub Releases 下载 x64 安装包。使用前，请准备你自己搭建或已获授权访问的媒体服务器。</p>
                         <div class="hero-actions">
                             <a class="button button-primary" href="https://apps.microsoft.com/detail/9nqjl7k0h8x0?hl=zh-CN&gl=CN" target="_blank" rel="noopener noreferrer">
-                                从微软商店安装
+                                从 Microsoft Store 安装
                                 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </a>
-                            <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">下载安装包</a>
+                            <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">从 GitHub 下载</a>
                         </div>
                         <dl class="requirements">
                             <div>
@@ -318,22 +329,51 @@
                                 <dd>Windows 10 1809 及以上，仅 x64</dd>
                             </div>
                             <div>
-                                <dt>服务端</dt>
-                                <dd>Emby 4.10.x；MoviePilot 3.x.x（可选）</dd>
+                                <dt>媒体服务器</dt>
+                                <dd>Emby 4.10.x；Jellyfin、飞牛影视与 Plex 请先查看<a href="#servers">兼容性说明</a></dd>
                             </div>
                             <div>
                                 <dt>可选组件</dt>
-                                <dd>「网页控制台」页需要 WebView2 Runtime</dd>
+                                <dd>MoviePilot 3.x.x（搜索、订阅与整理，需单独配置）</dd>
+                            </div>
+                            <div>
+                                <dt>网页控制台</dt>
+                                <dd>使用此页需要 WebView2 Runtime</dd>
                             </div>
                         </dl>
-                        <p class="download-fineprint">Momoka 以 <a href="https://github.com/cudamin/Momoka/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>开源；随包的 mpv / libmpv 为 LGPL 构建，第三方组件与许可正文见 <a href="https://github.com/cudamin/Momoka/blob/master/THIRD-PARTY-NOTICES.md" target="_blank" rel="noopener noreferrer">THIRD-PARTY-NOTICES</a>。应用不收集、不上传、不分享你的数据，详见<a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私政策</a>。</p>
+                        <p class="download-fineprint">Momoka 按 <a href="https://github.com/cudamin/Momoka/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>开源，随包 mpv / libmpv 为 LGPL 构建；组件许可见 <a href="https://github.com/cudamin/Momoka/blob/master/THIRD-PARTY-NOTICES.md" target="_blank" rel="noopener noreferrer">第三方组件说明</a>。应用不收集个人信息、使用统计或诊断数据；运行时仍会连接媒体服务器和相关服务，详见<a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私政策</a>。</p>
                     </div>
-                    <div class="download-mark" aria-hidden="true">
-                        <div class="mark-glow"></div>
-                        <img src="assets/app-icon.png" alt="" width="132" height="132">
-                        <p>Momoka</p>
-                        <span>原生 WinUI 3 媒体库客户端</span>
-                    </div>
+                    <aside class="getting-started" aria-labelledby="start-title">
+                        <div class="start-brand">
+                            <img src="assets/app-icon.png" alt="" width="40" height="40">
+                            <span>首次使用</span>
+                        </div>
+                        <h3 id="start-title">从安装到播放</h3>
+                        <ol class="setup-steps">
+                            <li>
+                                <span class="step-number" aria-hidden="true">01</span>
+                                <div>
+                                    <h4>安装客户端</h4>
+                                    <p>选择 Microsoft Store 或 GitHub 安装包，适用于 Windows x64。</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number" aria-hidden="true">02</span>
+                                <div>
+                                    <h4>连接媒体服务器</h4>
+                                    <p>填写服务器地址，登录有权访问的账号。不同服务端的支持范围不同。</p>
+                                    <a href="#servers">先查看兼容性 <span aria-hidden="true">↗</span></a>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-number" aria-hidden="true">03</span>
+                                <div>
+                                    <h4>设置播放偏好</h4>
+                                    <p>按需调整画质、字幕和版本优先级。多账号聚合与 MoviePilot 均为可选功能。</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -350,13 +390,13 @@
                             <small>媒体库客户端</small>
                         </span>
                     </a>
-                    <p>面向 Windows 的原生媒体库客户端。把片库、播放和订阅收进同一块屏幕。</p>
+                    <p>为 Windows 打造的原生媒体库客户端。集中浏览自己的片库，按偏好播放。</p>
                 </div>
                 <nav class="footer-links" aria-label="项目链接">
                     <div>
                         <p class="footer-title">项目</p>
                         <a href="https://github.com/cudamin/Momoka" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+                        <a href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">版本下载</a>
                         <a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私政策</a>
                         <a href="https://github.com/cudamin/Momoka/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>
                     </div>
@@ -370,7 +410,7 @@
                         <p class="footer-title">页面</p>
                         <a href="#player">播放</a>
                         <a href="#interface">界面</a>
-                        <a href="#servers">服务端</a>
+                        <a href="#servers">兼容性</a>
                         <a href="#download">下载</a>
                     </div>
                 </nav>
