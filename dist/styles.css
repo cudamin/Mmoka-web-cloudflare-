@@ -1061,7 +1061,7 @@ h1 {
 .aggregate h3 {
     margin: 0 0 14px;
     font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.03em;
 }
 
