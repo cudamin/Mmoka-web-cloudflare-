@@ -352,9 +352,9 @@ button {
     grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
     gap: clamp(36px, 5vw, 72px);
     align-items: center;
-    min-height: min(76vh, 740px);
+    min-height: min(60vh, 600px);
     padding-top: 24px;
-    padding-bottom: 56px;
+    padding-bottom: 40px;
 }
 
 h1 {
@@ -557,6 +557,15 @@ h1 {
 
 .section-head .eyebrow {
     margin-bottom: 16px;
+}
+
+.section-head-solo {
+    display: block;
+}
+
+.section-head-solo .section-lede {
+    max-width: 48em;
+    margin-top: 18px;
 }
 
 .section-lede {
