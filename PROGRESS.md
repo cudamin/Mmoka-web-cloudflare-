@@ -38,4 +38,5 @@ Emby / Jellyfin      | 飞牛影视 / Plex（双列）
 - 商店、公开 Releases 页面、README、隐私、许可证、第三方组件与三份服务端说明的链接读取均返回 HTTP 200。GitHub `releases/latest` API 曾限流（403），改查原本使用的公开 Releases 页面成功；未据此宣称已核对最新版安装包。
 - 截图与浏览器记录保存在本树被忽略的 `.wrangler/copy-verification/`；它们是本次本地浏览器证据，不是应用截图或线上部署证据。
 - 仅网站变更，不构建或发布 WinUI 应用，不访问真实媒体服务器、不启动播放。
-- 未获上传授权，不推送 GitHub、不改仓库在线简介、不部署 Cloudflare。
+- 初次本地交付时未获上传授权，因此未推送 GitHub、未修改仓库在线简介、未部署 Cloudflare。
+- 2026-10-22：用户明确授权上传本次网站改动到 `cudamin/Mmoka-web-cloudflare-`，推送目标为 `main`；未另行修改仓库在线简介，不把 Git 推送成功视为 Cloudflare 生产部署已验证。
