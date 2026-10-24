@@ -40,3 +40,19 @@ Emby / Jellyfin      | 飞牛影视 / Plex（双列）
 - 仅网站变更，不构建或发布 WinUI 应用，不访问真实媒体服务器、不启动播放。
 - 初次本地交付时未获上传授权，因此未推送 GitHub、未修改仓库在线简介、未部署 Cloudflare。
 - 2026-10-22：用户明确授权上传本次网站改动到 `cudamin/Mmoka-web-cloudflare-`，推送目标为 `main`；未另行修改仓库在线简介，不把 Git 推送成功视为 Cloudflare 生产部署已验证。
+
+## 2026-10-25 — 网页发布侧车（本地准备，不推送）
+
+- 独立克隆：`C:/Users/89400/.codex/worktrees/momoka-website-release-20261025`。
+- 官方 remote：`https://github.com/cudamin/Mmoka-web-cloudflare-.git`；默认分支 `main`，本轮分支 `codex/release-features-20261025`，起点 `c9784c76cd3b78ec2cc09d2ec9264f2f17060771`。
+- 范围仅 `index.html`、`dist/index.html`、`README.md`、本记录、`tests/site-copy.test.mjs`、`tests/release-copy.test.mjs`、`tests/test_site_links.py` 和 `tools/check_site_links.py`。不触碰 Momoka 父树代码、其他工作树或主目录的 untracked website/vibe_images；不改 CSS、运行 JavaScript、图片、Workers 或部署配置。
+- 0.1.8 先标为待发布；GitHub 入口指向官方 latest / Releases，商店入口使用产品 9NQJL7K0H8X0，按钮不承诺已可安装。父窗口确认真实 release 与商店状态后才能更新准确版本、推送 `main` 并核查生产服务。
+- 补充剧集组 / 季订阅、普通订阅与分集 / 全集洗版、电影订阅再点击取消；保留原有弹幕、快捷键、Emby 片头 / 片尾标记和各服务功能。
+- 同步正文、6 项 FAQ、metadata、OpenGraph、Twitter 描述及 SoftwareApplication JSON-LD；翻译 / 补帧均默认关闭，明确 API 外发 / 费用 / DPAPI 不备份、PGS / VOBSUB 无 OCR 不适用、CPU minterpolate 的 8-bit SDR 限制与性能代价，不夸大为 SVP / RIFE / AI GPU 补帧。
+- 只按用户提供的实现合同与官方仓库公开文档 / 源码核对文案；官方 master README 仍含较旧的字幕默认描述，未把它覆盖到网站。GitHub tree API 返回 403 限流，不作为源码完整核对成功的证据。
+- Node.js v24.19.0 / Python 3.13.2 标准库验证：`node --test tests/site-copy.test.mjs tests/release-copy.test.mjs` 50 项通过、0 失败 / 跳过；`py -3 -B tests/test_site_links.py` 20 项通过。原有 20 项 Node 检查保留，新检查含 14 个故意破坏文案 / JSON-LD / 下载路径的拒绝场景；Python 覆盖 HTTP 404、403、429、超时及严格模式，不把未核实洗为通过。
+- `py -3 -B tools/check_site_links.py --root .` 离线通过：源 / dist 字节一致、资源、锚点与 14 个外链（含文档片段）；`--strict-live` 实际 GET 检查去掉片段后的 13 个唯一外链全部 HTTP 200、0 坏链接、0 未核实。初次 HEAD 遇商店 403 / QQ 405，仅作不适用方法记录；最终 GET 的实际读数替代它，但不证明新版本商店可安装。
+- `node --check` 核对原有 main.js、dist/main.js、worker/index.js 与两份 Node 测试，Python AST 核对新增两份脚本，全部通过。没有包安装或编译步骤，不构建 WinUI。
+- 本地短时绑定 127.0.0.1 随机端口检查 dist 首页、index、CSS、JS 和三张图片：7 / 7 HTTP 200 且字节匹配；服务已关闭。仅静态 HTTP，不操作桌面，不冒充浏览器或应用视觉验收；排版和真实应用验收交给主窗口。
+- `git diff --check` 通过；本轮 8 个文本文件保持 LF，index / dist HTML 完全同步，CSS、运行 JavaScript、图片和部署配置无 diff。
+- 本轮仅本地提交；不推送、不部署，不操作桌面、真实应用、播放、账号或密钥。等待父窗口最终验收绿、核对 GitHub release / Store 状态并发出明确发布指令后再继续。

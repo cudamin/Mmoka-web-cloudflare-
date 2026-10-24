@@ -136,7 +136,7 @@ test('document stays balanced and retains navigation, hidden headings and contro
     assert.match(html, /<h1 id="hero-title" class="sr-only">/);
     assert.match(html, /<h2 id="player-title" class="sr-only">/);
     assert.deepEqual([...html.matchAll(/<section\b[^>]*id="([^"]+)"/g)].map(([, id]) => id),
-        ['top', 'player', 'interface', 'servers', 'download']);
+        ['top', 'player', 'interface', 'servers', 'download', 'faq']);
     assert.equal([...html.matchAll(/data-set-theme="/g)].length, 5);
     assert.equal([...html.matchAll(/<article class="server-card reveal">/g)].length, 4);
 });
@@ -146,7 +146,7 @@ test('search and sharing descriptions identify the product without overstating c
     const metas = tagsOf(html).filter(([, tag]) => tag === 'meta').map(([, , source]) => attributesOf(source));
     assert.equal(title, 'Momoka — Windows 原生媒体库客户端');
     assert.equal(metas.find(meta => meta.property === 'og:title')?.content, title);
-    for (const identifier of ['description', 'og:description']) {
+    for (const identifier of ['description', 'og:description', 'twitter:description']) {
         const description = metas.find(meta => (meta.name ?? meta.property) === identifier)?.content;
         assert.ok(description && description.length >= 50 && description.length <= 160);
         assert.match(description, /Windows.*libmpv/);
@@ -165,12 +165,15 @@ test('store and GitHub download destinations are preserved and consistently labe
     const store = anchors.filter(anchor => anchor.href.startsWith('https://apps.microsoft.com/'));
     assert.equal(store.length, 2);
     for (const link of store) {
-        assert.equal(link.href, 'https://apps.microsoft.com/detail/9nqjl7k0h8x0?hl=zh-CN&gl=CN');
-        assert.equal(link.text, '从 Microsoft Store 安装');
+        assert.equal(link.href, 'https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN');
+        assert.equal(link.text, '查看 Microsoft Store');
     }
+    const latest = anchors.filter(anchor => anchor.href === 'https://github.com/cudamin/Momoka/releases/latest');
+    assert.equal(latest.length, 2);
+    assert.equal(latest.filter(anchor => anchor.text === 'GitHub 最新正式版').length, 2);
     const releases = anchors.filter(anchor => anchor.href === 'https://github.com/cudamin/Momoka/releases');
-    assert.equal(releases.length, 3);
-    assert.equal(releases.filter(anchor => anchor.text === '从 GitHub 下载').length, 2);
+    assert.equal(releases.length, 1);
+    assert.equal(releases[0].text, '版本下载');
     for (const path of ['README.md', 'PRIVACY.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) {
         assert.ok(anchors.some(anchor => anchor.href === `https://github.com/cudamin/Momoka/blob/master/${path}`));
     }

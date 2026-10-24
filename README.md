@@ -1,9 +1,32 @@
 # Momoka 官网
 
-Momoka 的官方介绍与下载指引站。说明 Windows 原生界面、libmpv 播放、字幕与版本筛选、多账号聚合和可选 MoviePilot 集成，并分别标注 Emby、Jellyfin、飞牛影视与 Plex 的支持范围。
+Momoka 的官方介绍与下载指引站，仅介绍 Windows 桌面客户端，不提供网页播放、媒体内容或服务器账号。说明 WinUI 3、libmpv、字幕与版本筛选、多账号聚合、弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记和可选 MoviePilot 集成，并分别标注 Emby、Jellyfin、飞牛影视与 Plex 的支持范围。
 
 - 主项目：[cudamin/Momoka](https://github.com/cudamin/Momoka)
 - 站点是纯静态 HTML/CSS/JavaScript，可以直接部署到 Cloudflare Pages，也可以放进任意 Nginx 容器。
+
+## 0.1.8 文案准备（待发布）
+
+本轮准备版本为 **0.1.8（待发布）**，版本号仍需发布前复核，不代表 GitHub release 已创建或 Microsoft Store 已上架。网页下载入口始终指向官方页面，不预填尚未存在的版本安装包：
+
+- GitHub 最新正式发布页：[cudamin/Momoka/releases/latest](https://github.com/cudamin/Momoka/releases/latest)；历史版本：[Releases](https://github.com/cudamin/Momoka/releases)。
+- Microsoft Store：[产品 9NQJL7K0H8X0](https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN)。新版本可能仍在审核，以商店实际可用版本为准；页面返回 200 也不能证明 0.1.8 已可安装。
+
+### 三项新功能与限制
+
+- **MoviePilot 订阅**：电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击「订阅」，已订阅后再次点击即可取消。需要启用并连接自己的 MoviePilot，服务关闭或连接不可用时相关入口自动隐藏。搜索、主页订阅列表与手动整理继续保留。
+- **实时文字字幕翻译**：可选 Google Cloud Translation v2、Microsoft Translator v3 或兼容 OpenAI API 的 AI 服务，保留原字幕。PGS / VOBSUB 无 OCR 时不适用，也不是语音识别或音频转写。翻译默认关闭，需自备 API key，第三方 API 可能收费；启用后字幕原文外发到所选翻译服务。密钥仅在本机用 Windows DPAPI 加密，不参与设置备份；本机加密不等于字幕原文不会离开设备。
+- **可选补帧**：默认关闭，可选平滑插值与 CPU 运动补偿（minterpolate）。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深跳过 Motion。不提供 SVP、RIFE 或 AI GPU 补帧。卡顿、运动伪影和额外延迟是可能的代价，性能不足时建议关闭。
+
+保留弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记、着色器、字幕与版本筛选、多账号聚合，以及按服务端能力和权限显示的管理入口。字幕默认仍优先简体中文，其次匹配其他中文字幕；服务端验证边界未因这次文案更新而扩大。使用客户端需要你自己的合法媒体来源和有权访问的账号。网页不承诺免账号或第三方服务免费，媒体服务器、MoviePilot 和翻译 API 的账号与费用需自行确认。
+
+页面正文、FAQ、description、OpenGraph、Twitter 描述与 SoftwareApplication JSON-LD 使用相同的待发布状态和功能边界。结构化数据不添加价格、评分、已上架承诺或待发布安装包地址。
+
+### 本轮交付与后续发布
+
+本轮仅本地提交，**不 push、不部署**。主窗口验收通过并确认真实 GitHub release 版本、Microsoft Store 审核 / 可用版本后，才按新的发布指令更新正文、metadata、JSON-LD、README 与相应测试，再推送 `main`。商店尚在审核时仍保留审核提示。
+
+Git 推送成功不等于 Cloudflare 已部署：之后需核对对应提交的真实 GitHub check / 服务部署状态与生产页面内容；没有生产服务证据时，只报告已推送，不宣称已上线。下方部署命令是维护说明，不是本轮已执行的操作。
 
 ## 目录结构
 
@@ -30,18 +53,38 @@ cp -r assets/* dist/assets/
 
 ## 本地预览与文案检查
 
-使用 Node.js 内置测试运行器，无需额外安装依赖：
+站点没有包安装或编译步骤。使用 Node.js 和 Python 标准库检查，无需额外安装依赖：
 
 ```bash
-node --test tests/site-copy.test.mjs
+node --test tests/site-copy.test.mjs tests/release-copy.test.mjs
+py -3 -B tests/test_site_links.py
+py -3 -B tools/check_site_links.py --root .
 ```
 
-检查覆盖源文件与 `dist/` 一致性、页面结构、可点击功能目录、兼容性卡片与首次使用步骤、资源与锚点、下载与项目链接、服务端验证边界、字幕默认行为，以及可选组件和隐私表述。检查工具自身也包含错误文案、坏链接与部署文件漂移的失败场景。
+原有检查可单独运行：`node --test tests/site-copy.test.mjs`。新检查覆盖版本 / 待发布状态在正文、FAQ、metadata、JSON-LD 和 README 中的一致性，三项功能的格式 / 隐私 / 费用 / 性能边界，以及原有弹幕、快捷键、标记和服务功能。两组检查均包含故意破坏文案、链接、JSON-LD 或 `dist/` 的失败场景。
+
+外链脚本默认离线验证 URL、官方 GitHub 下载路径、商店产品 ID、HTTPS、无凭据链接、文档路径、锚点、资源及 `index.html` / `dist/index.html` 字节一致性。确需联网检查时再运行：
+
+```bash
+py -3 -B tools/check_site_links.py --root . --live
+```
+
+`--live` 只使用无认证的 HTTP GET 检查链接可达性，不登录、不使用 API key。404 / 410 等明确坏链接使检查失败；403、429、服务端错误或超时记为 **未核实**，不算通过。商店及社区页面可能拦截自动请求，可用 `--strict-live` 让任何未核实项也导致非零退出。无论链接是否可达，脚本都不核对已安装版本、不证明商店已上架，也不证明 Cloudflare 已部署。
+
+本地与部署文件的一致性、平衡标签、可点击目录、兼容性卡片、首次使用步骤、资源和锚点的检查继续保留。页面排版仍由主窗口验收，不以静态检查替代视觉验收。
 
 Windows 本地预览（需要 Python）：
 
+在此仓库根目录执行：
+
 ```powershell
 py -m http.server 8080 --bind 127.0.0.1 --directory dist
+```
+
+本轮独立目录也可用绝对路径预览：
+
+```powershell
+py -3 -m http.server 8080 --bind 127.0.0.1 --directory 'C:\Users\89400\.codex\worktrees\momoka-website-release-20261025\dist'
 ```
 
 浏览器打开 `http://127.0.0.1:8080/`，修改文件后刷新。部署前仍需查看桌面和窄屏排版，不能仅用内容检查代替视觉检查。
