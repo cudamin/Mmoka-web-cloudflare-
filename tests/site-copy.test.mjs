@@ -65,12 +65,20 @@ function assertSupportBoundaries(markup) {
     const emby = serverOf(markup, 'Emby');
     assert.match(emby, /主要支持.*4\.10\.x/);
     const jellyfin = serverOf(markup, 'Jellyfin');
-    assert.match(jellyfin, /离线适配/);
-    assert.match(jellyfin, /真实服务器上的播放、写入及网页控制台登录尚未验证/);
+    assert.match(jellyfin, /实服播放通过/);
+    assert.match(jellyfin, /10\.10\.7.*2026-10-26/);
+    assert.match(jellyfin, /已实测登录恢复、媒体库读取、原画播放和续播/);
+    assert.match(jellyfin, /管理写入未验证/);
+    assert.match(jellyfin, /内嵌网页控制台登录与界面实屏尚未完成验证/);
+    assert.match(jellyfin, /内置 libmpv.*独占管线/);
+    assert.match(jellyfin, /不代表所有版本均兼容/);
     const fnnas = serverOf(markup, '飞牛影视');
-    assert.match(fnnas, /前端核对/);
+    assert.match(fnnas, /实服播放通过/);
     assert.match(fnnas, /0\.9\.8.*0\.8\.43/);
-    assert.match(fnnas, /原画播放尚未实测/);
+    assert.match(fnnas, /2026-10-26 已实测登录恢复、媒体库读取、原画播放和续播/);
+    assert.match(fnnas, /详情零时长的流时长回退/);
+    assert.match(fnnas, /管理写入未验证/);
+    assert.match(fnnas, /内置 libmpv.*独占管线/);
     assert.match(fnnas, /不代表所有版本均兼容/);
     const plex = serverOf(markup, 'Plex');
     assert.match(plex, /实验性/);
@@ -266,6 +274,8 @@ const regressions = [
     ['unsafe new tab', () => assertLinks(html.replace('rel="noopener noreferrer"', 'rel="noreferrer"'), root), /Unsafe new-tab link/],
     ['obsolete subtitle default', () => assertPlaybackCopy(html.replace('默认优先简体中文，其次匹配其他中文字幕', '默认排除繁体中文')), /默认优先简体中文/],
     ['unverified Plex promoted to verified', () => assertSupportBoundaries(html.replace('尚未连接真实 Plex 服务器核对', '已通过真实 Plex 服务器核对')), /尚未连接真实 Plex/],
+    ['Jellyfin management overclaim', () => assertSupportBoundaries(html.replace('管理写入未验证，内嵌网页', '管理写入全部通过，内嵌网页')), /管理写入未验证/],
+    ['FnNas version overclaim', () => assertSupportBoundaries(html.replace('所列版本不代表所有版本均兼容', '所有版本均兼容')), /不代表所有版本均兼容/],
     ['unbalanced markup', () => assertBalanced(html.replace('</figure>', '</div>')), /Mismatched closing tag/],
 ];
 for (const [name, check, expected] of regressions) {

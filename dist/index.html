@@ -30,7 +30,7 @@
             "0.1.8 候选版：字幕翻译默认关闭；需自备 API key，可能收费，启用后字幕原文外发到所选翻译服务；密钥本机 DPAPI 加密，不参与设置备份；PGS / VOBSUB 无 OCR 时不适用。",
             "0.1.8 候选版：补帧默认关闭；可选平滑插值与 CPU 运动补偿（minterpolate）；Motion 仅用于已识别的 8-bit SDR，HDR / 高位深跳过 Motion；可能增加卡顿、伪影与延迟；不提供 SVP、RIFE 或 AI GPU 补帧。",
             "保留弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记、多账号聚合、字幕和版本筛选，以及按服务端能力与权限显示的管理入口。",
-            "媒体服务器可接入 Emby、Jellyfin、飞牛影视与 Plex，支持范围因服务端而异；Jellyfin 真实服务器关键功能、飞牛原画播放与 Plex 真实服务器仍未验证。",
+            "媒体服务器可接入 Emby、Jellyfin、飞牛影视与 Plex，支持范围因服务端而异；2026-10-26 已实测 Jellyfin 10.10.7 与飞牛网页 0.9.8／服务 0.8.43 的登录恢复、媒体库读取、原画播放和续播。管理写入未验证，Plex 尚未实服核对。",
             "MoviePilot 搜索、订阅与手动整理为可选服务；本站不提供网页播放、媒体内容或服务器账号，不承诺第三方服务免费。"
         ]
     }
@@ -258,7 +258,7 @@
                         <p class="eyebrow">媒体服务器</p>
                         <h2 id="servers-title">媒体服务器支持情况</h2>
                     </div>
-                    <p class="section-lede">可接入 Emby、Jellyfin、飞牛影视与 Plex。不同服务端的适配进度和验证范围不同，连接前请先查看对应说明。</p>
+                    <p class="section-lede">Jellyfin 与飞牛已完成实测版本的原画播放和续播；不同服务端的支持范围不同。<a href="https://github.com/cudamin/Momoka/blob/master/docs/实服验证-飞牛与Jellyfin-2026-10-26.md" target="_blank" rel="noopener noreferrer">查看实服验证记录</a>，其他版本与管理写入不作兼容保证。</p>
                 </div>
 
                 <div class="server-grid">
@@ -277,24 +277,24 @@
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>Jellyfin</h3>
-                            <span class="state state-partial">离线适配</span>
+                            <span class="state state-primary">实服播放通过</span>
                         </div>
-                        <p class="server-version">协议与离线界面适配</p>
-                        <p class="server-copy">已完成协议与离线界面适配；真实服务器上的播放、写入及网页控制台登录尚未验证。</p>
+                        <p class="server-version">Jellyfin 10.10.7 · 2026-10-26 实测</p>
+                        <p class="server-copy">已实测登录恢复、媒体库读取、原画播放和续播，暂停与定位正常，服务端没有转码。管理写入未验证，内嵌网页控制台登录与界面实屏尚未完成验证；不代表所有版本均兼容。</p>
                         <div class="server-footer">
-                            <p class="server-meta">真实服务器关键功能：未验证</p>
+                            <p class="server-meta">内置 libmpv · 独占管线 · 进度上报零失败</p>
                             <a class="server-link" aria-label="Jellyfin 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/Jellyfin支持.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>飞牛影视</h3>
-                            <span class="state state-partial">前端核对</span>
+                            <span class="state state-primary">实服播放通过</span>
                         </div>
                         <p class="server-version">网页 0.9.8 · 服务 0.8.43</p>
-                        <p class="server-copy">已按官方前端核对接口。当前原画播放尚未实测；所列版本仅为核对记录，不代表所有版本均兼容。</p>
+                        <p class="server-copy">2026-10-26 已实测登录恢复、媒体库读取、原画播放和续播，中文字幕正常，进度上报零失败；修复详情零时长的流时长回退。管理写入未验证，所列版本不代表所有版本均兼容。</p>
                         <div class="server-footer">
-                            <p class="server-meta">真实原画播放：未验证</p>
+                            <p class="server-meta">内置 libmpv · 独占管线 · 原画与续播通过</p>
                             <a class="server-link" aria-label="飞牛影视 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/飞牛影视.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
