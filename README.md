@@ -5,14 +5,16 @@ Momoka 的官方介绍与下载指引站，仅介绍 Windows 桌面客户端，�
 - 主项目：[cudamin/Momoka](https://github.com/cudamin/Momoka)
 - 站点是纯静态 HTML/CSS/JavaScript，可以直接部署到 Cloudflare Pages，也可以放进任意 Nginx 容器。
 
-## 0.1.8 文案准备（待发布）
+## 0.1.8 候选版说明（正式发布暂缓）
 
-本轮准备版本为 **0.1.8（待发布）**，版本号仍需发布前复核，不代表 GitHub release 已创建或 Microsoft Store 已上架。网页下载入口始终指向官方页面，不预填尚未存在的版本安装包：
+0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。最终并发UI自动化验收出现尚未定位的原生崩溃，正式发布暂缓。安装器与 MSIX 仍只是候选产物；本轮不发布应用二进制、不提交微软商店、不替换桌面稳定版。网页下载入口指向已公开版本，不预填候选安装包：
 
-- GitHub 最新正式发布页：[cudamin/Momoka/releases/latest](https://github.com/cudamin/Momoka/releases/latest)；历史版本：[Releases](https://github.com/cudamin/Momoka/releases)。
-- Microsoft Store：[产品 9NQJL7K0H8X0](https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN)。新版本可能仍在审核，以商店实际可用版本为准；页面返回 200 也不能证明 0.1.8 已可安装。
+- GitHub 发布页：[已公开版本](https://github.com/cudamin/Momoka/releases)，请留意各版本的预发布标记。辅助 [latest 跳转](https://github.com/cudamin/Momoka/releases/latest) 只用于打开 GitHub 所指向的页面，不据此判定正式版或稳定版。
+- Microsoft Store：[产品 9NQJL7K0H8X0](https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN)。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。页面返回 200 不代表候选版已提交或可安装。
 
-### 三项新功能与限制
+### 三项候选版新功能与限制
+
+下述三项新功能属于 0.1.8 候选版说明，尚待完成验收，不把它们当作线上 0.1.7 的已交付能力。
 
 - **MoviePilot 订阅**：电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击「订阅」，已订阅后再次点击即可取消。需要启用并连接自己的 MoviePilot，服务关闭或连接不可用时相关入口自动隐藏。搜索、主页订阅列表与手动整理继续保留。
 - **实时文字字幕翻译**：可选 Google Cloud Translation v2、Microsoft Translator v3 或兼容 OpenAI API 的 AI 服务，保留原字幕。PGS / VOBSUB 无 OCR 时不适用，也不是语音识别或音频转写。翻译默认关闭，需自备 API key，第三方 API 可能收费；启用后字幕原文外发到所选翻译服务。密钥仅在本机用 Windows DPAPI 加密，不参与设置备份；本机加密不等于字幕原文不会离开设备。
@@ -20,11 +22,11 @@ Momoka 的官方介绍与下载指引站，仅介绍 Windows 桌面客户端，�
 
 保留弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记、着色器、字幕与版本筛选、多账号聚合，以及按服务端能力和权限显示的管理入口。字幕默认仍优先简体中文，其次匹配其他中文字幕；服务端验证边界未因这次文案更新而扩大。使用客户端需要你自己的合法媒体来源和有权访问的账号。网页不承诺免账号或第三方服务免费，媒体服务器、MoviePilot 和翻译 API 的账号与费用需自行确认。
 
-页面正文、FAQ、description、OpenGraph、Twitter 描述与 SoftwareApplication JSON-LD 使用相同的待发布状态和功能边界。结构化数据不添加价格、评分、已上架承诺或待发布安装包地址。
+页面正文、FAQ、description、OpenGraph、Twitter 描述与 SoftwareApplication JSON-LD 使用相同的候选版未提交状态和功能边界。JSON-LD 的 `softwareVersion` 为线上版本 `0.1.7`，`releaseNotes` 说明候选版 `0.1.8` 的功能和暂缓原因，`downloadUrl` 指向 GitHub 发布页。结构化数据不添加价格、评分、已上架承诺或候选安装包地址。
 
 ### 本轮交付与后续发布
 
-本轮仅本地提交，**不 push、不部署**。主窗口验收通过并确认真实 GitHub release 版本、Microsoft Store 审核 / 可用版本后，才按新的发布指令更新正文、metadata、JSON-LD、README 与相应测试，再推送 `main`。商店尚在审核时仍保留审核提示。
+主窗口已验收上一轮网页 DOM 和三功能说明，本轮只更新准确的候选状态。用户已授权网页仓库更新，但当前仍只本地提交，**不 push、不部署**；先将本轮 diff / SHA 交给父窗口，等主窗口验收通过并明确给出绿色 `push main` 指令后，才在原树干净、`origin/main` 可安全快进时推送 `main`。不用图形公共提交表单，不合并其他未提交内容。网页获准推送也不等于应用二进制发布获准；应用发布和商店提交由主窗口负责。
 
 Git 推送成功不等于 Cloudflare 已部署：之后需核对对应提交的真实 GitHub check / 服务部署状态与生产页面内容；没有生产服务证据时，只报告已推送，不宣称已上线。下方部署命令是维护说明，不是本轮已执行的操作。
 
@@ -61,7 +63,7 @@ py -3 -B tests/test_site_links.py
 py -3 -B tools/check_site_links.py --root .
 ```
 
-原有检查可单独运行：`node --test tests/site-copy.test.mjs`。新检查覆盖版本 / 待发布状态在正文、FAQ、metadata、JSON-LD 和 README 中的一致性，三项功能的格式 / 隐私 / 费用 / 性能边界，以及原有弹幕、快捷键、标记和服务功能。两组检查均包含故意破坏文案、链接、JSON-LD 或 `dist/` 的失败场景。
+原有检查可单独运行：`node --test tests/site-copy.test.mjs`。新检查覆盖线上 0.1.7 / 候选 0.1.8 未提交状态在正文、FAQ、metadata、JSON-LD 和 README 中的一致性，三项功能的格式 / 隐私 / 费用 / 性能边界，以及原有弹幕、快捷键、标记和服务功能。两组检查均包含故意破坏文案、链接、JSON-LD 或 `dist/` 的失败场景。
 
 外链脚本默认离线验证 URL、官方 GitHub 下载路径、商店产品 ID、HTTPS、无凭据链接、文档路径、锚点、资源及 `index.html` / `dist/index.html` 字节一致性。确需联网检查时再运行：
 

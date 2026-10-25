@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momoka — Windows 原生媒体库客户端</title>
-    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 待发布：MoviePilot 剧集订阅、可选实时文字字幕翻译与补帧；多账号、弹幕及服务功能保留。支持范围因服务端而异，翻译可能收费并外发原文，商店状态以实际页面为准。">
+    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。">
     <meta name="theme-color" content="#060a07">
     <meta property="og:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 待发布：MoviePilot 剧集订阅、可选实时文字字幕翻译与补帧；多账号、弹幕及服务功能保留。支持范围因服务端而异，翻译可能收费并外发原文，商店状态以实际页面为准。">
+    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 待发布：MoviePilot 剧集订阅、可选实时文字字幕翻译与补帧；多账号、弹幕及服务功能保留。支持范围因服务端而异，翻译可能收费并外发原文，商店状态以实际页面为准。">
+    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -19,16 +19,16 @@
         "name": "Momoka",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Windows 10 1809 及以上，仅 x64",
-        "softwareVersion": "0.1.8（待发布）",
-        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 待发布：MoviePilot 剧集订阅、可选实时文字字幕翻译与补帧；多账号、弹幕及服务功能保留。支持范围因服务端而异，翻译可能收费并外发原文，商店状态以实际页面为准。",
+        "softwareVersion": "0.1.7",
+        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。",
         "url": "https://github.com/cudamin/Momoka",
-        "downloadUrl": "https://github.com/cudamin/Momoka/releases/latest",
-        "releaseNotes": "0.1.8 待发布：剧集订阅、实时文字字幕翻译与可选补帧。GitHub release 与 Microsoft Store 审核状态待确认，正式下载以实际页面为准。",
+        "downloadUrl": "https://github.com/cudamin/Momoka/releases",
+        "releaseNotes": "0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。最终并发UI自动化验收出现尚未定位的原生崩溃，正式发布暂缓。候选版功能：剧集订阅、实时文字字幕翻译与可选补帧。",
         "featureList": [
-            "电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击订阅，再次点击取消。",
-            "Google Cloud Translation v2、Microsoft Translator v3、兼容 OpenAI API 的 AI 服务：实时文字字幕翻译，保留原字幕。",
-            "字幕翻译默认关闭；需自备 API key，可能收费，启用后字幕原文外发到所选翻译服务；密钥本机 DPAPI 加密，不参与设置备份；PGS / VOBSUB 无 OCR 时不适用。",
-            "补帧默认关闭；可选平滑插值与 CPU 运动补偿（minterpolate）；Motion 仅用于已识别的 8-bit SDR，HDR / 高位深跳过 Motion；可能增加卡顿、伪影与延迟；不提供 SVP、RIFE 或 AI GPU 补帧。",
+            "0.1.8 候选版：电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击订阅，再次点击取消。",
+            "0.1.8 候选版：Google Cloud Translation v2、Microsoft Translator v3、兼容 OpenAI API 的 AI 服务：实时文字字幕翻译，保留原字幕。",
+            "0.1.8 候选版：字幕翻译默认关闭；需自备 API key，可能收费，启用后字幕原文外发到所选翻译服务；密钥本机 DPAPI 加密，不参与设置备份；PGS / VOBSUB 无 OCR 时不适用。",
+            "0.1.8 候选版：补帧默认关闭；可选平滑插值与 CPU 运动补偿（minterpolate）；Motion 仅用于已识别的 8-bit SDR，HDR / 高位深跳过 Motion；可能增加卡顿、伪影与延迟；不提供 SVP、RIFE 或 AI GPU 补帧。",
             "保留弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记、多账号聚合、字幕和版本筛选，以及按服务端能力与权限显示的管理入口。",
             "媒体服务器可接入 Emby、Jellyfin、飞牛影视与 Plex，支持范围因服务端而异；Jellyfin 真实服务器关键功能、飞牛原画播放与 Plex 真实服务器仍未验证。",
             "MoviePilot 搜索、订阅与手动整理为可选服务；本站不提供网页播放、媒体内容或服务器账号，不承诺第三方服务免费。"
@@ -76,13 +76,13 @@
                     <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Windows · WinUI 3 · libmpv</p>
                     <p class="lede">Momoka 以原生 WinUI 3 界面连接你的媒体服务器，用 libmpv 播放。画质、字幕和版本按偏好设置，多服务器、多账号也能集中浏览。</p>
                     <p class="hero-compatibility">Emby · Jellyfin · 飞牛影视 · Plex <a href="#servers">查看支持范围 <span aria-hidden="true">↗</span></a></p>
-                    <p class="hero-compatibility" id="release-status">0.1.8 待发布 · GitHub 与商店版本以实际页面为准，商店新版本可能仍在审核。<a href="#faq">查看新功能与限制 <span aria-hidden="true">↗</span></a></p>
+                    <p class="hero-compatibility" id="release-status">0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。<a href="#faq">查看新功能与暂缓原因 <span aria-hidden="true">↗</span></a></p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN" target="_blank" rel="noopener noreferrer">
                             查看 Microsoft Store
                             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
-                        <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases/latest" target="_blank" rel="noopener noreferrer">GitHub 最新正式版</a>
+                        <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub 发布页</a>
                     </div>
                     <ul class="hero-meta">
                         <li>Windows 10 1809+ · 仅 x64</li>
@@ -117,7 +117,7 @@
                 <div class="section-head section-head-solo reveal">
                     <div>
                         <p class="eyebrow">播放体验</p>
-                        <p class="section-lede">用 libmpv 播放，把画质、字幕与版本的选择留给你。按片源调整处理方式，按偏好挑选字幕和视频版本，少一点开播后的反复设置。</p>
+                        <p class="section-lede">用 libmpv 播放，把画质、字幕与版本的选择留给你。按片源调整处理方式，按偏好挑选字幕和视频版本，少一点开播后的反复设置。下方实时字幕翻译与补帧为 0.1.8 候选版功能，尚待完成验收。</p>
                     </div>
                 </div>
 
@@ -338,7 +338,7 @@
                     <article class="aside-card reveal" id="moviepilot">
                         <p class="eyebrow">MoviePilot · 可选集成</p>
                         <h3>搜索与订阅，放在同一个窗口</h3>
-                        <p>连接你自己的 MoviePilot 3.x.x 服务，即可在 Momoka 中搜索资源、管理订阅和手动整理；主页也能查看订阅列表。此功能可选，需要单独配置。电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击「订阅」，已订阅后再次点击即可取消。服务关闭或连接不可用时，依赖它的入口自动隐藏。</p>
+                        <p>连接你自己的 MoviePilot 3.x.x 服务，即可在 Momoka 中搜索资源、管理订阅和手动整理；主页也能查看订阅列表。此功能可选，需要单独配置。下述订阅改进属于 0.1.8 候选版，尚待完成验收：电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击「订阅」，已订阅后再次点击即可取消。服务关闭或连接不可用时，依赖它的入口自动隐藏。</p>
                     </article>
                     <article class="aside-card reveal">
                         <p class="eyebrow">服务端界面</p>
@@ -355,18 +355,18 @@
                     <div class="download-copy">
                         <p class="eyebrow">Windows · x64</p>
                         <h2 id="download-title">下载 Momoka</h2>
-                        <p class="download-lede">GitHub 最新正式发布页提供已发布的 x64 安装包；Microsoft Store 的新版本可能仍在审核，以商店实际可用版本为准。本站是桌面客户端的介绍与下载指引，不提供网页播放。使用前，请准备你自己搭建或已获授权访问的媒体服务器与账号。</p>
+                        <p class="download-lede">GitHub 发布页列出已公开版本，请留意预发布标记。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。本站是桌面客户端的介绍与下载指引，不提供网页播放。使用前，请准备你自己搭建或已获授权访问的媒体服务器与账号。</p>
                         <div class="hero-actions">
                             <a class="button button-primary" href="https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN" target="_blank" rel="noopener noreferrer">
                                 查看 Microsoft Store
                                 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </a>
-                            <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases/latest" target="_blank" rel="noopener noreferrer">GitHub 最新正式版</a>
+                            <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub 发布页</a>
                         </div>
                         <dl class="requirements">
                             <div>
                                 <dt>准备版本</dt>
-                                <dd>0.1.8（待发布）；GitHub release 与 Microsoft Store 审核状态待确认</dd>
+                                <dd>0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收；正式发布暂缓</dd>
                             </div>
                             <div>
                                 <dt>系统</dt>
@@ -398,7 +398,7 @@
                                 <span class="step-number" aria-hidden="true">01</span>
                                 <div>
                                     <h4>安装客户端</h4>
-                                    <p>在 GitHub 最新正式发布页选择 Windows x64 安装包，或查看 Microsoft Store 实际可用版本；商店新版本可能仍在审核。</p>
+                                    <p>在 GitHub 发布页查看已公开的 Windows x64 版本，留意预发布标记。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。</p>
                                 </div>
                             </li>
                             <li>
@@ -429,12 +429,12 @@
                         <p class="eyebrow">使用前先了解</p>
                         <h2 id="faq-title">新功能与常见问题</h2>
                     </div>
-                    <p class="section-lede">0.1.8 功能说明先行准备，正式发布与商店审核状态尚待确认。翻译和补帧均默认关闭，开启前请了解片源限制、隐私与性能代价。</p>
+                    <p class="section-lede">0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。下方三项新功能为候选版说明；翻译和补帧均默认关闭，开启前请了解片源限制、隐私与性能代价。</p>
                 </div>
                 <div class="aside-grid">
                     <article class="aside-card reveal" id="faq-release">
-                        <h3>0.1.8 已经可以下载吗？</h3>
-                        <p>本轮准备版本为 0.1.8（待发布）。GitHub 以最新正式发布页为准，Microsoft Store（微软商店）的该版本可能仍在审核；商店页面可访问不代表该版本已可安装。发布状态确认后再更新本站说明。</p>
+                        <h3>0.1.8 为什么还没发布？</h3>
+                        <p>0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。最终并发UI自动化验收出现尚未定位的原生崩溃，正式发布暂缓。</p>
                     </article>
                     <article class="aside-card reveal" id="faq-subscriptions">
                         <h3>电视剧和电影如何订阅？</h3>

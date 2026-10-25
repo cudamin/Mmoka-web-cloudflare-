@@ -20,7 +20,8 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 HOSTS = {"github.com", "apps.microsoft.com", "t.me", "qm.qq.com"}
 PRIVATE_QUERY_KEYS = {"key", "api_key", "apikey", "token", "access_token", "auth", "authorization", "password", "secret", "signature"}
-LATEST_URL = "https://github.com/cudamin/Momoka/releases/latest"
+RELEASE_URL = "https://github.com/cudamin/Momoka/releases"
+LATEST_URL = RELEASE_URL + "/latest"  # Auxiliary redirect only; not proof of a stable release.
 STORE_ID = "9NQJL7K0H8X0"
 
 
@@ -98,7 +99,7 @@ def validate_markup(markup: str, directory: Path) -> set[str]:
     for key in ("url", "downloadUrl"):
         require(isinstance(data.get(key), str), f"Missing JSON-LD URL: {key}")
         external.add(validate_external(data[key]))
-    require(data["downloadUrl"] == LATEST_URL, "JSON-LD must use official latest release")
+    require(data["downloadUrl"] == RELEASE_URL, "JSON-LD must use official release listing")
     return external
 
 
@@ -118,7 +119,7 @@ def check_site(root: Path) -> set[str]:
     links = validate_markup(source.decode("utf-8"), root)
     require(links == validate_markup(deployed.decode("utf-8"), root / "dist"), "Source/dist external link drift")
     links.update(markdown_links((root / "README.md").read_text(encoding="utf-8")))
-    require(LATEST_URL in links, "Missing official latest download link")
+    require(RELEASE_URL in links, "Missing official release listing link")
     require(any(urlsplit(url).path == f"/detail/{STORE_ID}" for url in links), "Missing Store product link")
     return links
 

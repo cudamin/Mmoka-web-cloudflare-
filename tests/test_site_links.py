@@ -35,8 +35,8 @@ class Response:
 class SiteLinkTests(unittest.TestCase):
     def test_current_source_and_dist_have_valid_official_links(self):
         urls = links.check_site(ROOT)
-        self.assertIn(links.LATEST_URL, urls)
-        self.assertIn("https://github.com/cudamin/Momoka/releases", urls)
+        self.assertIn(links.RELEASE_URL, urls)
+        self.assertIn(links.LATEST_URL, urls)  # README auxiliary link, not a stable-version claim.
         self.assertTrue(any("/detail/9NQJL7K0H8X0" in url for url in urls))
         self.assertTrue(any("/docs/Plex支持.md" in url for url in urls))
 
@@ -93,11 +93,11 @@ class SiteLinkTests(unittest.TestCase):
 
     def test_protocol_relative_link_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "HTTPS"):
-            links.validate_markup(HTML.replace(links.LATEST_URL, "//github.com/cudamin/Momoka/releases/latest"), ROOT)
+            links.validate_markup(HTML.replace(links.RELEASE_URL, "//github.com/cudamin/Momoka/releases"), ROOT)
 
     def test_metadata_download_url_is_checked(self):
-        with self.assertRaisesRegex(ValueError, "official latest release"):
-            links.validate_markup(HTML.replace('"downloadUrl": "' + links.LATEST_URL + '"', '"downloadUrl": "https://github.com/cudamin/Momoka/releases"'), ROOT)
+        with self.assertRaisesRegex(ValueError, "official release listing"):
+            links.validate_markup(HTML.replace('"downloadUrl": "' + links.RELEASE_URL + '"', '"downloadUrl": "' + links.LATEST_URL + '"'), ROOT)
 
     def test_dist_drift_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "byte drift"):

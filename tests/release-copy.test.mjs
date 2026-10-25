@@ -8,9 +8,12 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const html = readFileSync(join(root, 'index.html'), 'utf8');
 const deployed = readFileSync(join(root, 'dist/index.html'), 'utf8');
 const readme = readFileSync(join(root, 'README.md'), 'utf8');
-const version = '0.1.8'; // Prepare only; change after the parent confirms the real release.
+const candidateVersion = '0.1.8';
+const publicVersion = '0.1.7'; // Public version; the candidate is not submitted to Microsoft Store.
+const candidateStatus = '0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收';
+const holdReason = '最终并发UI自动化验收出现尚未定位的原生崩溃，正式发布暂缓';
 const storeUrl = 'https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN';
-const latestUrl = 'https://github.com/cudamin/Momoka/releases/latest';
+const releaseUrl = 'https://github.com/cudamin/Momoka/releases';
 const stripTags = markup => markup.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 const visibleText = markup => stripTags(markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ''));
 
@@ -39,10 +42,16 @@ function structuredOf(markup) {
     return JSON.parse(scripts[0][1]);
 }
 
-function assertPending(copy) {
-    assert.match(copy, /0\.1\.8[（( ]*待发布/);
-    assert.match(copy, /商店.*(?:实际|审核)/);
-    assert.doesNotMatch(copy, /0\.1\.8\s*(?:已上架|已发布|现已可安装)/);
+function assertCandidateStatus(copy) {
+    assert.ok(copy.includes(candidateStatus), 'Missing exact candidate / Store status');
+    assert.doesNotMatch(copy, /(?:商店|Store|该版本|新版本|0\.1\.8)[^。\n]*可能[^。\n]*审核|审核状态(?:尚)?待确认|最新正式/);
+    assert.doesNotMatch(copy, /0\.1\.8\s*(?:已上架|已发布|现已可安装|已提交微软商店)/);
+}
+
+function assertReleaseHold(copy) {
+    assertCandidateStatus(copy);
+    assert.ok(copy.includes(holdReason), 'Missing native-crash release hold reason');
+    assert.doesNotMatch(copy, /(?:等待|未发布|暂缓)[^。\n]*(?:翻译密钥|API key)|(?:翻译密钥|API key)[^。\n]*(?:导致|原因)/);
 }
 
 function assertSubscriptions(copy) {
@@ -101,9 +110,10 @@ function assertDownloadLinks(markup) {
         assert.equal(anchor.href, storeUrl);
         assert.equal(anchor.text, '查看 Microsoft Store');
     }
-    const latest = anchors.filter(anchor => anchor.text === 'GitHub 最新正式版');
-    assert.equal(latest.length, 2);
-    for (const anchor of latest) assert.equal(anchor.href, latestUrl);
+    const releases = anchors.filter(anchor => anchor.text === 'GitHub 发布页');
+    assert.equal(releases.length, 2);
+    for (const anchor of releases) assert.equal(anchor.href, releaseUrl);
+    assert.doesNotMatch(visibleText(markup), /GitHub 最新正式版|最新正式发布页/);
     assert.doesNotMatch(markup, /releases\/download\/v?0\.1\.8|releases\/tag\/v?0\.1\.8/);
 }
 
@@ -126,18 +136,20 @@ function assertMetadata(markup) {
     assert.equal(meta.get('twitter:card'), 'summary');
     assert.equal(data['@context'], 'https://schema.org');
     assert.equal(data['@type'], 'SoftwareApplication');
-    assert.equal(data.softwareVersion, `${version}（待发布）`);
-    assert.equal(data.downloadUrl, latestUrl);
+    assert.equal(data.softwareVersion, publicVersion);
+    assert.equal(data.downloadUrl, releaseUrl);
     assert.equal(data.url, 'https://github.com/cudamin/Momoka');
     assert.equal(data.operatingSystem, 'Windows 10 1809 及以上，仅 x64');
     assert.equal(data.applicationCategory, 'MultimediaApplication');
-    assertPending(description);
+    assertCandidateStatus(description);
     assert.match(description, /字幕翻译与补帧/);
+    assert.match(description, /翻译与补帧默认关闭/);
     assert.match(description, /翻译可能收费并外发原文/);
-    assert.match(data.releaseNotes, /0\.1\.8 待发布.*商店|0\.1\.8 待发布.*Microsoft Store/);
+    assertReleaseHold(data.releaseNotes);
     // No fabricated price, review, release date, build number or pending download asset.
     for (const key of ['offers', 'aggregateRating', 'review', 'datePublished', 'softwareBuildNumber']) assert.ok(!(key in data), `Unsupported schema promise: ${key}`);
     const features = data.featureList.join(' ');
+    assert.equal(data.featureList.filter(feature => feature.startsWith(`${candidateVersion} 候选版：`)).length, 4);
     assertSubscriptions(features);
     assertTranslation(features);
     assertPrivacy(features);
@@ -146,7 +158,7 @@ function assertMetadata(markup) {
 }
 
 for (const [label, markup] of [['source', html], ['dist', deployed]]) {
-    test(`${label}: version, metadata, OpenGraph and JSON-LD agree on the pending release`, () => assertMetadata(markup));
+    test(`${label}: public 0.1.7 and unsubmitted 0.1.8 candidate agree across metadata and JSON-LD`, () => assertMetadata(markup));
     test(`${label}: MoviePilot copy retains existing services and all subscription modes`, () => {
         const copy = blockOf(markup, 'article', 'moviepilot');
         assertSubscriptions(copy);
@@ -171,8 +183,10 @@ for (const [label, markup] of [['source', html], ['dist', deployed]]) {
     });
     test(`${label}: official downloads have neutral Store labels and no invented 0.1.8 asset`, () => {
         assertDownloadLinks(markup);
-        assertPending(blockOf(markup, 'p', 'release-status'));
-        assertPending(blockOf(markup, 'article', 'faq-release'));
+        assertCandidateStatus(blockOf(markup, 'p', 'release-status'));
+        assertCandidateStatus(visibleText(markup));
+        assertReleaseHold(blockOf(markup, 'article', 'faq-release'));
+        assert.match(blockOf(markup, 'section', 'faq'), /三项新功能为候选版说明/);
     });
     test(`${label}: existing playback, server and legal-source boundaries remain`, () => {
         assertPreserved(visibleText(markup));
@@ -181,8 +195,8 @@ for (const [label, markup] of [['source', html], ['dist', deployed]]) {
     });
 }
 
-test('README matches pending version, feature limits, downloads and release workflow', () => {
-    assertPending(readme);
+test('README matches candidate hold, native-crash reason, downloads and website-only release workflow', () => {
+    assertReleaseHold(readme);
     assertSubscriptions(readme);
     assertTranslation(readme);
     assertPrivacy(readme);
@@ -190,7 +204,10 @@ test('README matches pending version, feature limits, downloads and release work
     assertPreserved(readme);
     assertWebsiteBoundary(readme);
     assert.ok(readme.includes(storeUrl));
-    assert.ok(readme.includes(latestUrl));
+    assert.ok(readme.includes(releaseUrl));
+    assert.match(readme, /不据此判定正式版或稳定版/);
+    assert.match(readme, /diff \/ SHA/);
+    assert.match(readme, /网页获准推送也不等于应用二进制发布获准/);
     assert.match(readme, /不 push、不部署/);
     assert.match(readme, /主窗口验收通过/);
     assert.match(readme, /推送 `main`/);
@@ -215,7 +232,11 @@ test('edited text files use LF and source/dist HTML are byte-identical', () => {
 // Mutation fixtures exercise the new guardrails, not only the current successful copy.
 const regressions = [
     ['metadata drift', () => assertMetadata(html.replace('property="og:description" content="Momoka', 'property="og:description" content="Old Momoka')), /strictly equal/],
-    ['JSON-LD pretending a final release', () => assertMetadata(html.replace('"softwareVersion": "0.1.8（待发布）"', '"softwareVersion": "0.1.8"')), /strictly equal/],
+    ['candidate promotion and inaccurate hold status', () => {
+        assert.throws(() => assertCandidateStatus(readme.replaceAll(candidateStatus, '0.1.8 可能仍在审核')), /candidate \/ Store status/);
+        assert.throws(() => assertReleaseHold(readme.replace(holdReason, '等待用户提供翻译密钥，正式发布暂缓')), /native-crash release hold reason/);
+        assertMetadata(html.replace('"softwareVersion": "0.1.7"', '"softwareVersion": "0.1.8"'));
+    }, /strictly equal/],
     ['fabricated free-service schema', () => assertMetadata(html.replace('"@type": "SoftwareApplication",', '"@type": "SoftwareApplication", "offers": {"price": "0"},')), /Unsupported schema promise/],
     ['corrupt JSON-LD', () => assertMetadata(html.replace('"@context": "https://schema.org",', '"@context": ,')), /JSON/],
     ['missing series subscription mode', () => assertSubscriptions(readme.replaceAll('分集洗版', '仅普通订阅')), /Missing subscription mode/],

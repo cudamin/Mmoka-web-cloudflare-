@@ -168,12 +168,11 @@ test('store and GitHub download destinations are preserved and consistently labe
         assert.equal(link.href, 'https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN');
         assert.equal(link.text, '查看 Microsoft Store');
     }
-    const latest = anchors.filter(anchor => anchor.href === 'https://github.com/cudamin/Momoka/releases/latest');
-    assert.equal(latest.length, 2);
-    assert.equal(latest.filter(anchor => anchor.text === 'GitHub 最新正式版').length, 2);
     const releases = anchors.filter(anchor => anchor.href === 'https://github.com/cudamin/Momoka/releases');
-    assert.equal(releases.length, 1);
-    assert.equal(releases[0].text, '版本下载');
+    assert.equal(releases.length, 3);
+    assert.equal(releases.filter(anchor => anchor.text === 'GitHub 发布页').length, 2);
+    assert.equal(releases.filter(anchor => anchor.text === '版本下载').length, 1);
+    assert.doesNotMatch(html, /最新正式发布页|GitHub 最新正式版/);
     for (const path of ['README.md', 'PRIVACY.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) {
         assert.ok(anchors.some(anchor => anchor.href === `https://github.com/cudamin/Momoka/blob/master/${path}`));
     }
