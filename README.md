@@ -1,5 +1,5 @@
-# Momoka
-
+# Momoka 官网
+ 
 Momoka 的官方介绍与下载指引站，仅介绍 Windows 桌面客户端，不提供网页播放、媒体内容或服务器账号。说明 WinUI 3、libmpv、字幕与版本筛选、多账号聚合、弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记和可选 MoviePilot 集成，并分别标注 Emby、Jellyfin、飞牛影视与 Plex 的支持范围。
 
 - 主项目：[cudamin/Momoka](https://github.com/cudamin/Momoka)
