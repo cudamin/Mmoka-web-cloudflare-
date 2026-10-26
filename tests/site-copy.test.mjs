@@ -62,38 +62,27 @@ function assertLinks(markup, assetRoot) {
 }
 
 function assertSupportBoundaries(markup) {
-    const emby = serverOf(markup, 'Emby');
-    assert.match(emby, /主要支持.*4\.10\.x/);
+    assert.match(serverOf(markup, 'Emby'), /主要支持.*浏览媒体库、播放影片并同步观看进度/);
     const jellyfin = serverOf(markup, 'Jellyfin');
-    assert.match(jellyfin, /实服播放通过/);
-    assert.match(jellyfin, /10\.10\.7.*2026-10-26/);
-    assert.match(jellyfin, /已实测登录恢复、媒体库读取、原画播放和续播/);
-    assert.match(jellyfin, /管理写入未验证/);
-    assert.match(jellyfin, /内嵌网页控制台登录与界面实屏尚未完成验证/);
-    assert.match(jellyfin, /内置 libmpv.*独占管线/);
-    assert.match(jellyfin, /不代表所有版本均兼容/);
+    assert.match(jellyfin, /播放已验证.*已实测登录恢复、媒体库读取、原画播放和续播/);
+    assert.match(jellyfin, /管理写入及内嵌网页控制台未验证/);
     const fnnas = serverOf(markup, '飞牛影视');
-    assert.match(fnnas, /实服播放通过/);
-    assert.match(fnnas, /0\.9\.8.*0\.8\.43/);
-    assert.match(fnnas, /2026-10-26 已实测登录恢复、媒体库读取、原画播放和续播/);
-    assert.match(fnnas, /详情零时长的流时长回退/);
-    assert.match(fnnas, /管理写入未验证/);
-    assert.match(fnnas, /内置 libmpv.*独占管线/);
-    assert.match(fnnas, /不代表所有版本均兼容/);
+    assert.match(fnnas, /播放已验证.*已实测登录恢复、媒体库读取、原画播放和续播/);
+    assert.match(fnnas, /中文字幕正常.*管理写入未验证/);
     const plex = serverOf(markup, 'Plex');
-    assert.match(plex, /实验性/);
-    assert.match(plex, /尚未连接真实 Plex 服务器核对/);
-    assert.match(plex, /实际连接、浏览和播放仍需验证/);
+    assert.match(plex, /实验性.*尚未连接真实 Plex 服务器核对/);
+    assert.match(plex, /连接、浏览和播放仍需验证/);
+    assert.match(textOf(sectionOf(markup, 'servers')), /各服务端支持范围不同.*详细限制见支持说明/);
 }
 
 function assertPlaybackCopy(markup) {
     const player = textOf(sectionOf(markup, 'player'));
     assert.match(player, /默认优先简体中文，其次匹配其他中文字幕/);
-    assert.match(player, /双语、特效等关键词可按需设为优先或候补/);
+    assert.match(player, /双语或特效关键词调整优先级/);
     assert.doesNotMatch(player, /默认排除繁体|优先双语字幕与特效字幕|修复老片源|互不影响|画质完全交给/);
     assert.match(player, /启用着色器后/);
-    assert.match(player, /所选显卡档位/);
-    assert.match(player, /实际效果与性能开销取决于片源、显卡和所选档位/);
+    assert.match(player, /显卡档位/);
+    assert.match(player, /效果与性能开销取决于片源、显卡和所选档位/);
     assert.match(player, /默认将新入库版本排在前面/);
 }
 
@@ -178,8 +167,8 @@ test('store and GitHub download destinations are preserved and consistently labe
     }
     const releases = anchors.filter(anchor => anchor.href === 'https://github.com/cudamin/Momoka/releases');
     assert.equal(releases.length, 3);
-    assert.equal(releases.filter(anchor => anchor.text === 'GitHub 发布页').length, 2);
-    assert.equal(releases.filter(anchor => anchor.text === '版本下载').length, 1);
+    assert.equal(releases.filter(anchor => anchor.text === 'GitHub 下载').length, 2);
+    assert.equal(releases.filter(anchor => anchor.text === '客户端下载').length, 1);
     assert.doesNotMatch(html, /最新正式发布页|GitHub 最新正式版/);
     for (const path of ['README.md', 'PRIVACY.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) {
         assert.ok(anchors.some(anchor => anchor.href === `https://github.com/cudamin/Momoka/blob/master/${path}`));
@@ -194,13 +183,13 @@ test('aggregation, optional services, previews and privacy remain explicit', () 
     assert.match(servers, /聚合模式默认关闭/);
     assert.match(servers, /设置 → 服务器/);
     assert.match(servers, /两个及以上账号在线时/);
-    assert.match(servers, /MoviePilot 3\.x\.x.*此功能可选，需要单独配置/);
+    assert.match(servers, /MoviePilot.*可选功能，需单独配置/);
     assert.match(servers, /Plex 不提供管理入口/);
     assert.match(textOf(sectionOf(html, 'interface')), /主题配色示意，并非应用截图/);
     const download = sectionOf(html, 'download');
     assert.match(textOf(download), /Windows 10 1809 及以上，仅 x64/);
-    assert.match(download, /Jellyfin、飞牛影视与 Plex.*href="#servers"/);
-    assert.match(textOf(download), /可选组件.*MoviePilot 3\.x\.x.*需单独配置.*网页控制台.*WebView2 Runtime/);
+    assert.match(download, /Emby、Jellyfin、飞牛影视、Plex.*href="#servers"/);
+    assert.match(textOf(download), /可选组件.*MoviePilot.*需单独配置.*网页控制台.*WebView2 Runtime/);
     assert.match(textOf(download), /不收集个人信息、使用统计或诊断数据/);
     assert.match(textOf(download), /运行时仍会连接媒体服务器和相关服务/);
     assert.doesNotMatch(download, /不上传、不分享你的数据/);
@@ -250,16 +239,17 @@ test('responsive styles preserve focus, reduced motion and readable compatibilit
     assert.match(stylesheet, /:focus-visible\s*\{/);
     assert.match(stylesheet, /\.hero\s*\{[^}]*overflow: clip/);
     assert.match(stylesheet, /@media \(prefers-reduced-motion: reduce\)/);
-    assert.match(stylesheet, /\.server-grid\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+    assert.match(stylesheet, /\.server-grid\s*\{[^}]*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+    assert.match(stylesheet, /@media \(max-width: 1080px\)\s*\{\s*\.server-grid\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
     assert.match(stylesheet, /@media \(max-width: 720px\)/);
-    assert.match(stylesheet, /\.server-grid,\s*\.aside-grid\s*\{[^}]*grid-template-columns: 1fr/);
+    assert.match(stylesheet, /\.feature-list,\s*\.server-grid,\s*\.aside-grid\s*\{[^}]*grid-template-columns: 1fr/);
     assert.match(stylesheet, /\.hero-strip\s*\{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
     assert.match(stylesheet, /\.hero-strip li:last-child\s*\{[^}]*grid-column: 1 \/ -1/);
     assert.doesNotMatch(stylesheet, /\.download-mark|\.mark-glow|\.feature-num/);
 });
 
 test('README documents runnable checks and the deployed preview directory', () => {
-    assert.match(readme, /node --test tests\/site-copy\.test\.mjs/);
+    assert.match(readme, /node --test tests\/\*\.test\.mjs/);
     assert.match(readme, /py -m http\.server 8080 --bind 127\.0\.0\.1 --directory dist/);
     assert.match(readme, /cp index\.html styles\.css main\.js dist\//);
     assert.match(readme, /GitHub 仓库简介建议/);
@@ -274,8 +264,8 @@ const regressions = [
     ['unsafe new tab', () => assertLinks(html.replace('rel="noopener noreferrer"', 'rel="noreferrer"'), root), /Unsafe new-tab link/],
     ['obsolete subtitle default', () => assertPlaybackCopy(html.replace('默认优先简体中文，其次匹配其他中文字幕', '默认排除繁体中文')), /默认优先简体中文/],
     ['unverified Plex promoted to verified', () => assertSupportBoundaries(html.replace('尚未连接真实 Plex 服务器核对', '已通过真实 Plex 服务器核对')), /尚未连接真实 Plex/],
-    ['Jellyfin management overclaim', () => assertSupportBoundaries(html.replace('管理写入未验证，内嵌网页', '管理写入全部通过，内嵌网页')), /管理写入未验证/],
-    ['FnNas version overclaim', () => assertSupportBoundaries(html.replace('所列版本不代表所有版本均兼容', '所有版本均兼容')), /不代表所有版本均兼容/],
+    ['Jellyfin management overclaim', () => assertSupportBoundaries(html.replace('管理写入及内嵌网页控制台未验证', '管理写入及内嵌网页控制台全部通过')), /未验证/],
+    ['FnNas management overclaim', () => assertSupportBoundaries(html.replace('中文字幕正常。管理写入未验证', '中文字幕正常。管理写入全部通过')), /管理写入未验证/],
     ['unbalanced markup', () => assertBalanced(html.replace('</figure>', '</div>')), /Mismatched closing tag/],
 ];
 for (const [name, check, expected] of regressions) {

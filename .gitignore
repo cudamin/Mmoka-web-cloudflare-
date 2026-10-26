@@ -3,3 +3,4 @@ node_modules/
 .Momoka.qoder.site
 .DS_Store
 Thumbs.db
+.preview/

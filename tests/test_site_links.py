@@ -36,7 +36,8 @@ class SiteLinkTests(unittest.TestCase):
     def test_current_source_and_dist_have_valid_official_links(self):
         urls = links.check_site(ROOT)
         self.assertIn(links.RELEASE_URL, urls)
-        self.assertIn(links.LATEST_URL, urls)  # README auxiliary link, not a stable-version claim.
+        # The neutral release listing is required; latest is accepted by the validator, not required in page copy.
+        self.assertTrue(any("/docs/Jellyfin支持.md" in url for url in urls))
         self.assertTrue(any("/detail/9NQJL7K0H8X0" in url for url in urls))
         self.assertTrue(any("/docs/Plex支持.md" in url for url in urls))
 

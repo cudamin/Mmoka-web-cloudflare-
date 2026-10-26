@@ -91,3 +91,18 @@ Emby / Jellyfin      | 飞牛影视 / Plex（双列）
 - 端点从 `DANDANPLAY_APP_ID`、`DANDANPLAY_APP_SECRET`、`DANDANPLAY_CREDENTIAL_KEY`、`DANDANPLAY_CREDENTIAL_KID` 读取，AES-GCM 加密返回 7 天有效凭据；未配置返回 503，非 GET 返回 405。
 - 验证：`node --test tests/danmaku-credential.test.mjs` **5 项全过、0 失败**；`node --check` 三个 JS 文件通过。
 - **尚未推送、尚未部署、尚未配置真实 Secret**；线上端点与真实凭据未验证。客户端 `DandanPlayBuiltIn.Endpoint` 仍待按实际域名回填。
+
+## 2026-10-26 — 页面文案与组件布局简化（本地提交）
+
+- 工作树：C:/Users/89400/Momoka/work/web-cloudflare-20261026；分支 codex/simplify-page-layout，基于已核对的远端 main 提交 ae97e361964be346bbb44b3339829d51cfa55ce3。使用该独立网站仓库，不修改 Momoka 桌面源码、主目录 website 或其他存在未提交内容的旧官网树。
+- 保留墨绿主视觉和五套主题：色彩沿用背景 #060a07、正文 #edf4ef、说明 #9bada1、强调 #8be6a3、强强调 #c3f6cf；字体沿用 Segoe UI Variable / 中文系统字体。布局保持左对齐，以原有花瓣播放符号为主视觉，不另加大标题、装饰或新图片。
+- 精简首屏、播放、主题、服务器、聚合、MoviePilot、下载与页脚说明；删除页面、description / OpenGraph / Twitter 与 JSON-LD 中的软件版本号、候选说明、发布暂缓及排期，保留视频版本筛选这一产品功能。服务器版本和详细实测信息由支持文档承载，不再把它们写成长卡片。
+- 播放功能宽屏双列、手机单列；服务器卡片宽屏四列、平板双列、手机单列，并对齐同一行的页脚。缩小段落与分区间隔，主题按钮在窄屏仍保持双列；下载与三步指南重新分配宽度。
+- FAQ 改为 5 个原生 details / summary，默认收起；翻译与补帧默认关闭、字幕外发及费用等关键提示仍在功能概要中，详细 OCR / API key / DPAPI 不备份 / Motion 8-bit SDR / 性能代价在可展开答案中。按权限和服务可用性显示管理入口、Plex 未实服核对等边界不扩大。
+- main.js 只新增 FAQ 锚点展开：直接进入、点击功能说明和关闭后再次点同一链接均能展开对应答案；无效或未正确编码的 fragment 不报错。主题状态与本地保存保持不变。
+- 按本次范围退役 tests/release-copy.test.mjs 对发布状态的硬编码要求，用 tests/feature-copy.test.mjs 替换为版本缺席、简短文案及功能边界检查；原安全失败场景保留。更新 tests/site-copy.test.mjs 和 tests/test_site_links.py 的文案 / 布局 / latest 辅助链接要求，新增 tests/site-interactions.test.mjs，README 同步可运行命令。未放宽官方下载、凭据、API 或外链安全验证。
+- 新增 tools/check_site_layout.mjs：回环 HTTP + 独立无头 Edge，全部浏览器 context 仅允许回环来源，输出截图与报告到忽略的 .preview/。不操作用户鼠标或桌面、不访问媒体服务器、不登录、不播放、不读取真实 Secret。
+- 最终验证：Node 64 / 64、Python 链接测试 20 / 20，0 失败 / 跳过；离线资源 / 锚点 / 14 个公开外链检查通过；10 个 JS 文件语法、2 个 Python AST、Git 空白与 LF 检查通过。源 index / CSS / JS 与 dist 副本逐字节一致，原图片、Workers / Pages 凭据端点与部署配置无改动。
+- 浏览器 14 项全过：1440、1280、1080、960、768、720、390、320 共 8 种宽度无横向或组件溢出；5 套主题、保存恢复 / 无效值回退、键盘焦点 / Enter / Space、问答点击 / 深链接 / 重复打开 / 坏 fragment、禁用脚本、禁止 localStorage 和普通动画滚动均检查。另在独立失败夹具实际证明横向溢出、加载 JS 异常、图片丢失与缺少参数均非零退出，不接受失败为绿。
+- 已人工查看桌面整页、手机首屏及整页、展开 FAQ 与主题截图。证据目录为 C:/Users/89400/Momoka/work/web-cloudflare-20261026/.preview/page-layout-20261026/final；这是无头浏览器渲染截图，不冒充真实桌面或客户端截图。相同 1440 × 1000 预览下，默认折叠页面高度由 6630 px 缩至 4744 px。
+- 本次仅网页交付，不适用 WinUI 构建、自检、播放器探针或桌面发布闸门；本轮没有上传 / 部署授权，只创建对应本地提交，不 push、不 deploy。Cloudflare 生产内容、外链实时可达性和真实客户端能力未在本轮核验。

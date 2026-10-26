@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momoka — Windows 原生媒体库客户端</title>
-    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。">
+    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <meta name="theme-color" content="#060a07">
     <meta property="og:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。">
+    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。">
+    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -19,19 +19,18 @@
         "name": "Momoka",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Windows 10 1809 及以上，仅 x64",
-        "softwareVersion": "0.1.7",
-        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。候选功能：MoviePilot 剧集订阅、实时文字字幕翻译与补帧；翻译与补帧默认关闭，翻译可能收费并外发原文。支持范围因服务端而异。",
+        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。",
         "url": "https://github.com/cudamin/Momoka",
         "downloadUrl": "https://github.com/cudamin/Momoka/releases",
-        "releaseNotes": "0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。最终并发UI自动化验收出现尚未定位的原生崩溃，正式发布暂缓。候选版功能：剧集订阅、实时文字字幕翻译与可选补帧。",
         "featureList": [
-            "0.1.8 候选版：电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击订阅，再次点击取消。",
-            "0.1.8 候选版：Google Cloud Translation v2、Microsoft Translator v3、兼容 OpenAI API 的 AI 服务：实时文字字幕翻译，保留原字幕。",
-            "0.1.8 候选版：字幕翻译默认关闭；需自备 API key，可能收费，启用后字幕原文外发到所选翻译服务；密钥本机 DPAPI 加密，不参与设置备份；PGS / VOBSUB 无 OCR 时不适用。",
-            "0.1.8 候选版：补帧默认关闭；可选平滑插值与 CPU 运动补偿（minterpolate）；Motion 仅用于已识别的 8-bit SDR，HDR / 高位深跳过 Motion；可能增加卡顿、伪影与延迟；不提供 SVP、RIFE 或 AI GPU 补帧。",
-            "保留弹弹play 弹幕、播放快捷键、Emby 片头 / 片尾标记、多账号聚合、字幕和版本筛选，以及按服务端能力与权限显示的管理入口。",
-            "媒体服务器可接入 Emby、Jellyfin、飞牛影视与 Plex，支持范围因服务端而异；2026-10-26 已实测 Jellyfin 10.10.7 与飞牛网页 0.9.8／服务 0.8.43 的登录恢复、媒体库读取、原画播放和续播。管理写入未验证，Plex 尚未实服核对。",
-            "MoviePilot 搜索、订阅与手动整理为可选服务；本站不提供网页播放、媒体内容或服务器账号，不承诺第三方服务免费。"
+            "多服务器、多账号聚合，统一浏览媒体库与续播。",
+            "着色器按片源与显卡档位匹配；支持字幕和视频版本筛选。",
+            "弹弹play 弹幕、播放快捷键，以及 Emby 提供的片头 / 片尾标记。",
+            "MoviePilot 可选连接，提供搜索、订阅与手动整理；服务不可用时隐藏相关入口。",
+            "可选实时文字字幕翻译，保留原字幕；默认关闭，启用后原文外发至所选服务，可能收费。",
+            "可选补帧，默认关闭；CPU 运动补偿仅适用于已识别的 8-bit SDR，可能增加卡顿、伪影与延迟。",
+            "Emby 为主要支持；Jellyfin 与飞牛影视已实测原画播放和续播，部分管理操作未验证；Plex 仍为实验性。",
+            "本站不提供网页播放、媒体内容或服务器账号；需使用有权访问的账号，第三方服务账号与费用需自行确认。"
         ]
     }
     </script>
@@ -74,15 +73,14 @@
                 <div class="hero-copy">
                     <h1 id="hero-title" class="sr-only">Momoka — Windows 原生媒体库客户端</h1>
                     <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span>Windows · WinUI 3 · libmpv</p>
-                    <p class="lede">Momoka 以原生 WinUI 3 界面连接你的媒体服务器，用 libmpv 播放。画质、字幕和版本按偏好设置，多服务器、多账号也能集中浏览。</p>
+                    <p class="lede">连接你的媒体服务器，集中浏览片库。用 libmpv 播放，按偏好设置画质、字幕和视频版本。</p>
                     <p class="hero-compatibility">Emby · Jellyfin · 飞牛影视 · Plex <a href="#servers">查看支持范围 <span aria-hidden="true">↗</span></a></p>
-                    <p class="hero-compatibility" id="release-status">0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。<a href="#faq">查看新功能与暂缓原因 <span aria-hidden="true">↗</span></a></p>
                     <div class="hero-actions">
                         <a class="button button-primary" href="https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN" target="_blank" rel="noopener noreferrer">
                             查看 Microsoft Store
                             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
-                        <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub 发布页</a>
+                        <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub 下载</a>
                     </div>
                     <ul class="hero-meta">
                         <li>Windows 10 1809+ · 仅 x64</li>
@@ -102,9 +100,9 @@
 
             <div class="wrap">
                 <ul class="hero-strip" aria-label="功能概览">
-                    <li><a href="#player">画质与可选补帧 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#player">画质与补帧 <span aria-hidden="true">↗</span></a></li>
                     <li><a href="#aggregation">多账号聚合 <span aria-hidden="true">↗</span></a></li>
-                    <li><a href="#subtitles">字幕偏好与翻译 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#subtitles">字幕与翻译 <span aria-hidden="true">↗</span></a></li>
                     <li><a href="#versions">版本筛选 <span aria-hidden="true">↗</span></a></li>
                     <li><a href="#moviepilot">MoviePilot 订阅 <span aria-hidden="true">↗</span></a></li>
                 </ul>
@@ -117,7 +115,7 @@
                 <div class="section-head section-head-solo reveal">
                     <div>
                         <p class="eyebrow">播放体验</p>
-                        <p class="section-lede">用 libmpv 播放，把画质、字幕与版本的选择留给你。按片源调整处理方式，按偏好挑选字幕和视频版本，少一点开播后的反复设置。下方实时字幕翻译与补帧为 0.1.8 候选版功能，尚待完成验收。</p>
+                        <p class="section-lede">画质、字幕和视频版本，一次设置，按偏好播放。</p>
                     </div>
                 </div>
 
@@ -125,33 +123,35 @@
                     <ul class="feature-list">
                         <li class="reveal">
                             <div>
-                                <h3>画质处理，按片源匹配</h3>
-                                <p>启用着色器后，根据画面缩放比例、真人或动画类型，以及所选显卡档位匹配处理链。内置 ArtCNN、ravu、CfL、SSimDownscaler 等，也可手动选择档位。</p>
+                                <h3>画质按片源匹配</h3>
+                                <p>启用着色器后，按缩放比例、真人或动画片源和显卡档位匹配处理链，也可手动选择。</p>
                             </div>
                         </li>
                         <li class="reveal" id="subtitles">
                             <div>
-                                <h3>字幕选择，记住你的偏好</h3>
-                                <p>按语言和字幕标题设置优先级。默认优先简体中文，其次匹配其他中文字幕；双语、特效等关键词可按需设为优先或候补，不必每次开播重新挑选。</p>
-                                <p>可选实时文字字幕翻译：Google Cloud Translation v2、Microsoft Translator v3 或兼容 OpenAI API 的 AI 服务，保留原字幕。翻译默认关闭；需自备 API key，可能产生费用，并将字幕原文外发到所选服务。PGS / VOBSUB 无 OCR 时不适用。</p>
+                                <h3>字幕记住你的偏好</h3>
+                                <p>默认优先简体中文，其次匹配其他中文字幕；可按语言、双语或特效关键词调整优先级。</p>
+                                <p>可选实时文字字幕翻译，保留原字幕。翻译默认关闭，启用后字幕原文外发且可能收费。</p>
+                                <a class="feature-link" href="#faq-translation-formats">翻译支持与限制</a>
                             </div>
                         </li>
                         <li class="reveal" id="frame-interpolation">
                             <div>
-                                <h3>可选补帧，先看片源与性能</h3>
-                                <p>补帧默认关闭，可选平滑插值或 CPU 运动补偿（minterpolate）。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion。处理可能增加卡顿、运动伪影与播放延迟；这不是 SVP、RIFE 或 AI GPU 补帧。</p>
+                                <h3>补帧按需开启</h3>
+                                <p>补帧默认关闭，可选平滑插值或 CPU 运动补偿。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion，可能增加卡顿、伪影和延迟。</p>
+                                <a class="feature-link" href="#faq-interpolation">补帧适用范围</a>
                             </div>
                         </li>
                         <li class="reveal" id="playback-controls">
                             <div>
-                                <h3>弹幕、快捷键与片头片尾</h3>
-                                <p>保留弹弹play 弹幕与播放快捷键。Emby 提供片头 / 片尾标记时，可按标记跳过对应片段；字幕、版本筛选和原有服务功能继续保留。</p>
+                                <h3>弹幕、快捷键与跳过片段</h3>
+                                <p>支持弹弹play 弹幕和播放快捷键；Emby 提供片头 / 片尾标记时，可按标记跳过。</p>
                             </div>
                         </li>
                         <li class="reveal" id="versions">
                             <div>
-                                <h3>同一部片，优先播放想看的版本</h3>
-                                <p>可按入库时间排序，也可按文件名中的发布组等关键词设置优先级。默认将新入库版本排在前面；开启聚合模式后，还能选择同一部影视在不同服务器上的版本。</p>
+                                <h3>优先播放想看的视频版本</h3>
+                                <p>默认将新入库版本排在前面，也可按文件名关键词设置优先级；聚合模式下可跨服务器选择。</p>
                             </div>
                         </li>
                     </ul>
@@ -179,7 +179,7 @@
                                 <span class="pipeline-value">匹配的着色器链 · 色度重建</span>
                             </div>
                         </div>
-                        <p class="pipeline-note">着色器可单独开启或关闭，不会改写画质预设。实际效果与性能开销取决于片源、显卡和所选档位。</p>
+                        <p class="pipeline-note">着色器可独立开关；效果与性能开销取决于片源、显卡和所选档位。</p>
                     </aside>
                 </div>
             </div>
@@ -192,7 +192,7 @@
                         <p class="eyebrow">原生界面</p>
                         <h2 id="interface-title">五套深色主题</h2>
                     </div>
-                    <p class="section-lede">墨绿、纯黑、午夜、石墨、紫夜，五套深色主题配合原生 WinUI 3 动画与可收起侧栏。首页轮播展示片库内容，让浏览和切换保持连贯。</p>
+                    <p class="section-lede">五套深色配色，搭配原生动画与可收起侧栏。</p>
                 </div>
 
                 <div class="interface-grid">
@@ -214,14 +214,14 @@
                             <div class="preview-content">
                                 <p class="preview-kicker">深色主题</p>
                                 <p class="preview-headline">当前主题：<strong id="theme-name">墨绿</strong></p>
-                                <p class="preview-text">以深色背景衬托海报、剧照和正文。收起侧栏时保留图标导航，把更多空间留给片库。</p>
+                                <p class="preview-text">收起侧栏，把更多空间留给片库。</p>
                                 <span class="preview-action" aria-hidden="true">播放</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="theme-picker reveal">
-                        <p class="eyebrow">选一套你喜欢的</p>
+                        <p class="eyebrow">选择主题</p>
                         <div class="swatches" role="group" aria-label="切换界面配色样本">
                             <button type="button" class="swatch" data-set-theme="forest" aria-pressed="true">
                                 <span class="swatch-dot" style="--swatch:#2f6b4f"></span>
@@ -244,7 +244,7 @@
                                 <span>紫夜</span>
                             </button>
                         </div>
-                        <p class="theme-note">此处为主题配色示意，并非应用截图。选择主题会同步切换本站强调色。</p>
+                        <p class="theme-note">主题配色示意，并非应用截图；点击同步切换本站强调色。</p>
                         <p class="sr-only" role="status" id="theme-status">当前主题：墨绿</p>
                     </div>
                 </div>
@@ -256,9 +256,9 @@
                 <div class="section-head reveal">
                     <div>
                         <p class="eyebrow">媒体服务器</p>
-                        <h2 id="servers-title">媒体服务器支持情况</h2>
+                        <h2 id="servers-title">连接你的媒体服务器</h2>
                     </div>
-                    <p class="section-lede">Jellyfin 与飞牛已完成实测版本的原画播放和续播；不同服务端的支持范围不同。<a href="https://github.com/cudamin/Momoka/blob/master/docs/实服验证-飞牛与Jellyfin-2026-10-26.md" target="_blank" rel="noopener noreferrer">查看实服验证记录</a>，其他版本与管理写入不作兼容保证。</p>
+                    <p class="section-lede">各服务端支持范围不同，详细限制见支持说明。<a href="https://github.com/cudamin/Momoka/blob/master/docs/实服验证-飞牛与Jellyfin-2026-10-26.md" target="_blank" rel="noopener noreferrer">查看实服验证记录</a>。</p>
                 </div>
 
                 <div class="server-grid">
@@ -267,34 +267,31 @@
                             <h3>Emby</h3>
                             <span class="state state-primary">主要支持</span>
                         </div>
-                        <p class="server-version">4.10.x</p>
-                        <p class="server-copy">当前主要支持的服务端，可浏览媒体库、播放影片并同步观看进度。</p>
+                        <p class="server-copy">浏览媒体库、播放影片并同步观看进度。</p>
                         <div class="server-footer">
-                            <p class="server-meta">版本要求：Emby 4.10.x</p>
+                            <p class="server-meta">按账号权限显示入口</p>
                             <a class="server-link" aria-label="Emby 支持说明" href="https://github.com/cudamin/Momoka/blob/master/README.md#系统要求" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>Jellyfin</h3>
-                            <span class="state state-primary">实服播放通过</span>
+                            <span class="state state-primary">播放已验证</span>
                         </div>
-                        <p class="server-version">Jellyfin 10.10.7 · 2026-10-26 实测</p>
-                        <p class="server-copy">已实测登录恢复、媒体库读取、原画播放和续播，暂停与定位正常，服务端没有转码。管理写入未验证，内嵌网页控制台登录与界面实屏尚未完成验证；不代表所有版本均兼容。</p>
+                        <p class="server-copy">已实测登录恢复、媒体库读取、原画播放和续播。管理写入及内嵌网页控制台未验证。</p>
                         <div class="server-footer">
-                            <p class="server-meta">内置 libmpv · 独占管线 · 进度上报零失败</p>
+                            <p class="server-meta">原画播放与续播</p>
                             <a class="server-link" aria-label="Jellyfin 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/Jellyfin支持.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
                     <article class="server-card reveal">
                         <div class="server-top">
                             <h3>飞牛影视</h3>
-                            <span class="state state-primary">实服播放通过</span>
+                            <span class="state state-primary">播放已验证</span>
                         </div>
-                        <p class="server-version">网页 0.9.8 · 服务 0.8.43</p>
-                        <p class="server-copy">2026-10-26 已实测登录恢复、媒体库读取、原画播放和续播，中文字幕正常，进度上报零失败；修复详情零时长的流时长回退。管理写入未验证，所列版本不代表所有版本均兼容。</p>
+                        <p class="server-copy">已实测登录恢复、媒体库读取、原画播放和续播，中文字幕正常。管理写入未验证。</p>
                         <div class="server-footer">
-                            <p class="server-meta">内置 libmpv · 独占管线 · 原画与续播通过</p>
+                            <p class="server-meta">原画播放与字幕</p>
                             <a class="server-link" aria-label="飞牛影视 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/飞牛影视.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
@@ -303,10 +300,9 @@
                             <h3>Plex</h3>
                             <span class="state state-experimental">实验性</span>
                         </div>
-                        <p class="server-version">协议与离线测试适配</p>
-                        <p class="server-copy">已完成协议与离线测试适配，但尚未连接真实 Plex 服务器核对。实际连接、浏览和播放仍需验证。</p>
+                        <p class="server-copy">协议适配与离线测试已完成；尚未连接真实 Plex 服务器核对，连接、浏览和播放仍需验证。</p>
                         <div class="server-footer">
-                            <p class="server-meta">真实服务器：未核对</p>
+                            <p class="server-meta">仅完成离线测试</p>
                             <a class="server-link" aria-label="Plex 支持说明" href="https://github.com/cudamin/Momoka/blob/master/docs/Plex支持.md" target="_blank" rel="noopener noreferrer">支持说明 <span aria-hidden="true">↗</span></a>
                         </div>
                     </article>
@@ -314,22 +310,22 @@
 
                 <div class="aggregate reveal" id="aggregation">
                     <div>
-                        <h3>多服务器、多账号，一起浏览</h3>
-                        <p>开启聚合模式后，可同时登录多台服务器和多个账号，在主页集中浏览片库与最近添加。也可以保持默认的单服务器、单账号模式。</p>
+                        <h3>多账号片库，一起浏览</h3>
+                        <p>开启聚合模式，汇总在线账号的媒体库与最近添加，也可保留单账号模式。</p>
                         <p class="aggregate-note">聚合模式默认关闭，可在「设置 → 服务器」中打开。</p>
                     </div>
                     <ul class="aggregate-list">
                         <li>
                             <span>片库</span>
-                            <p>媒体库和「最近添加」汇总全部在线账号；两个及以上账号在线时，继续观看和库名旁会标注服务器名称。</p>
+                            <p>汇总在线账号的片库；两个及以上账号在线时，标注服务器名称。</p>
                         </li>
                         <li>
                             <span>账号</span>
-                            <p>使用「添加服务器／添加账号」保留当前连接；默认模式下切换来源，已保存的凭据也不会丢失。</p>
+                            <p>添加服务器或账号时保留当前连接，切换来源不会丢失已保存的凭据。</p>
                         </li>
                         <li>
                             <span>版本</span>
-                            <p>详情页可选择同一部影视在不同服务器上的版本，无需先切换服务器。</p>
+                            <p>同一部影视可跨服务器选择视频版本。</p>
                         </li>
                     </ul>
                 </div>
@@ -337,13 +333,14 @@
                 <div class="aside-grid">
                     <article class="aside-card reveal" id="moviepilot">
                         <p class="eyebrow">MoviePilot · 可选集成</p>
-                        <h3>搜索与订阅，放在同一个窗口</h3>
-                        <p>连接你自己的 MoviePilot 3.x.x 服务，即可在 Momoka 中搜索资源、管理订阅和手动整理；主页也能查看订阅列表。此功能可选，需要单独配置。下述订阅改进属于 0.1.8 候选版，尚待完成验收：电视剧支持按剧集组或季开启 / 关闭订阅，可选普通订阅、分集洗版、全集洗版；电影直接点击「订阅」，已订阅后再次点击即可取消。服务关闭或连接不可用时，依赖它的入口自动隐藏。</p>
+                        <h3>搜索、订阅与整理</h3>
+                        <p>连接自己的 MoviePilot，搜索资源、管理订阅和手动整理。可选功能，需单独配置；服务关闭或连接不可用时，相关入口自动隐藏。</p>
+                        <a class="feature-link" href="#faq-subscriptions">订阅方式</a>
                     </article>
                     <article class="aside-card reveal">
                         <p class="eyebrow">服务端界面</p>
-                        <h3>管理入口，按服务端和权限显示</h3>
-                        <p>单服务器在线时使用对应界面，多服务器在线时按来源分组。Emby、Jellyfin 和飞牛影视的管理入口按各自能力与账号权限显示；Plex 不提供管理入口。</p>
+                        <h3>管理入口，按权限显示</h3>
+                        <p>Emby、Jellyfin 和飞牛影视按各自能力与账号权限显示管理入口；聚合时按来源分组，Plex 不提供管理入口。</p>
                     </article>
                 </div>
             </div>
@@ -355,37 +352,34 @@
                     <div class="download-copy">
                         <p class="eyebrow">Windows · x64</p>
                         <h2 id="download-title">下载 Momoka</h2>
-                        <p class="download-lede">GitHub 发布页列出已公开版本，请留意预发布标记。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。本站是桌面客户端的介绍与下载指引，不提供网页播放。使用前，请准备你自己搭建或已获授权访问的媒体服务器与账号。</p>
+                        <p class="download-lede">安装 Windows 客户端，连接自己的媒体服务器，即可浏览和播放。本站不提供网页播放。</p>
                         <div class="hero-actions">
                             <a class="button button-primary" href="https://apps.microsoft.com/detail/9NQJL7K0H8X0?hl=zh-CN&gl=CN" target="_blank" rel="noopener noreferrer">
                                 查看 Microsoft Store
                                 <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </a>
-                            <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub 发布页</a>
+                            <a class="button button-ghost" href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">GitHub 下载</a>
                         </div>
                         <dl class="requirements">
-                            <div>
-                                <dt>准备版本</dt>
-                                <dd>0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收；正式发布暂缓</dd>
-                            </div>
                             <div>
                                 <dt>系统</dt>
                                 <dd>Windows 10 1809 及以上，仅 x64</dd>
                             </div>
                             <div>
                                 <dt>媒体服务器</dt>
-                                <dd>Emby 4.10.x；Jellyfin、飞牛影视与 Plex 请先查看<a href="#servers">兼容性说明</a></dd>
+                                <dd>Emby、Jellyfin、飞牛影视、Plex（<a href="#servers">支持范围</a>）</dd>
                             </div>
                             <div>
                                 <dt>可选组件</dt>
-                                <dd>MoviePilot 3.x.x（搜索、订阅与整理，需单独配置）</dd>
+                                <dd>MoviePilot（搜索、订阅与整理，需单独配置）</dd>
                             </div>
                             <div>
                                 <dt>网页控制台</dt>
-                                <dd>使用此页需要 WebView2 Runtime</dd>
+                                <dd>仅内嵌网页控制台需要 WebView2 Runtime</dd>
                             </div>
                         </dl>
-                        <p class="download-fineprint">Momoka 按 <a href="https://github.com/cudamin/Momoka/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>开源，随包 mpv / libmpv 为 LGPL 构建；组件许可见 <a href="https://github.com/cudamin/Momoka/blob/master/THIRD-PARTY-NOTICES.md" target="_blank" rel="noopener noreferrer">第三方组件说明</a>。开发者不收集个人信息、使用统计或诊断数据；运行时仍会连接媒体服务器和相关服务。字幕翻译默认关闭，启用后原文会发往所选翻译服务，可能产生 API 费用；密钥仅在本机用 DPAPI 加密，不参与设置备份。媒体服务器、MoviePilot 与第三方 API 的账号和费用需自行确认，详见<a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私政策</a>。</p>
+                        <p class="download-fineprint">Momoka 按 <a href="https://github.com/cudamin/Momoka/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>开源；mpv / libmpv 为 LGPL 构建，详见<a href="https://github.com/cudamin/Momoka/blob/master/THIRD-PARTY-NOTICES.md" target="_blank" rel="noopener noreferrer">组件许可</a>。</p>
+                        <p class="download-fineprint">不收集个人信息、使用统计或诊断数据；运行时仍会连接媒体服务器和相关服务。字幕翻译可能外发原文并产生费用，详见<a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私政策</a>。</p>
                     </div>
                     <aside class="getting-started" aria-labelledby="start-title">
                         <div class="start-brand">
@@ -398,14 +392,14 @@
                                 <span class="step-number" aria-hidden="true">01</span>
                                 <div>
                                     <h4>安装客户端</h4>
-                                    <p>在 GitHub 发布页查看已公开的 Windows x64 版本，留意预发布标记。0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。</p>
+                                    <p>从 Microsoft Store 或 GitHub 下载并安装。</p>
                                 </div>
                             </li>
                             <li>
                                 <span class="step-number" aria-hidden="true">02</span>
                                 <div>
                                     <h4>连接媒体服务器</h4>
-                                    <p>填写服务器地址，登录有权访问的账号。不同服务端的支持范围不同。</p>
+                                    <p>填写服务器地址，登录有权访问的账号。</p>
                                     <a href="#servers">先查看兼容性 <span aria-hidden="true">↗</span></a>
                                 </div>
                             </li>
@@ -413,7 +407,7 @@
                                 <span class="step-number" aria-hidden="true">03</span>
                                 <div>
                                     <h4>设置播放偏好</h4>
-                                    <p>按需调整画质、字幕和版本优先级。补帧与字幕翻译默认关闭；多账号聚合与 MoviePilot 均为可选功能。</p>
+                                    <p>设置画质、字幕和视频版本优先级；补帧与翻译按需开启。</p>
                                 </div>
                             </li>
                         </ol>
@@ -427,35 +421,46 @@
                 <div class="section-head reveal">
                     <div>
                         <p class="eyebrow">使用前先了解</p>
-                        <h2 id="faq-title">新功能与常见问题</h2>
+                        <h2 id="faq-title">常见问题</h2>
                     </div>
-                    <p class="section-lede">0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。下方三项新功能为候选版说明；翻译和补帧均默认关闭，开启前请了解片源限制、隐私与性能代价。</p>
+                    <p class="section-lede">按需启用订阅、翻译与补帧，使用前了解限制。</p>
                 </div>
-                <div class="aside-grid">
-                    <article class="aside-card reveal" id="faq-release">
-                        <h3>0.1.8 为什么还没发布？</h3>
-                        <p>0.1.8 尚未提交微软商店，线上仍为 0.1.7，候选版待完成验收。最终并发UI自动化验收出现尚未定位的原生崩溃，正式发布暂缓。</p>
-                    </article>
-                    <article class="aside-card reveal" id="faq-subscriptions">
-                        <h3>电视剧和电影如何订阅？</h3>
-                        <p>需要启用并连接自己的 MoviePilot。电视剧可按剧集组或季开启 / 关闭订阅，并选择普通订阅、分集洗版或全集洗版；电影直接点击「订阅」，已订阅后再次点击即可取消。服务不可用时，相关入口会隐藏。</p>
-                    </article>
-                    <article class="aside-card reveal" id="faq-translation-formats">
-                        <h3>实时翻译支持哪些字幕？</h3>
-                        <p>可选 Google Cloud Translation v2、Microsoft Translator v3 或兼容 OpenAI API 的 AI 服务，对文字字幕实时翻译并保留原字幕。PGS / VOBSUB 是图片字幕，无 OCR 时不适用；这里不是语音识别或音频转写功能。</p>
-                    </article>
-                    <article class="aside-card reveal" id="faq-translation-privacy">
-                        <h3>翻译会外发原文或产生费用吗？</h3>
-                        <p>字幕翻译默认关闭，需自备 API key。启用后会把字幕原文外发到所选翻译服务，第三方 API 可能收费，请先确认服务条款与额度。密钥仅在本机用 Windows DPAPI 加密，不参与设置备份；本机加密不等于字幕原文不会离开设备。</p>
-                    </article>
-                    <article class="aside-card reveal" id="faq-interpolation">
-                        <h3>补帧能用在 HDR 或所有片源上吗？</h3>
-                        <p>不能。补帧默认关闭，有平滑插值与 CPU 运动补偿（minterpolate）；Motion 仅用于已识别的 8-bit SDR，HDR / 高位深会跳过 Motion。不提供 SVP、RIFE 或 AI GPU 补帧。卡顿、运动伪影和额外延迟是可能的代价，性能不足时建议关闭。</p>
-                    </article>
-                    <article class="aside-card reveal" id="faq-website">
-                        <h3>能直接在网页播放，或免账号使用吗？</h3>
-                        <p>不能。本站仅介绍 Windows 桌面客户端并提供下载指引，不提供网页播放、媒体内容或服务器账号。需要你自己的合法媒体来源和有权访问的账号；MoviePilot、翻译 API 及其他第三方服务需自行配置，是否收费由相应服务决定。</p>
-                    </article>
+                <div class="faq-list">
+                    <details class="faq-item reveal" id="faq-subscriptions">
+                        <summary><span>电视剧和电影如何订阅？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>需连接自己的 MoviePilot。电视剧可按剧集组或季开启 / 关闭订阅，选择普通订阅、分集洗版或全集洗版。</p>
+                            <p>电影点击「订阅」，再次点击即可取消；服务不可用时相关入口隐藏。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-translation-formats">
+                        <summary><span>实时翻译支持哪些字幕？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>文字字幕可实时翻译并保留原字幕。支持 Google Cloud Translation、Microsoft Translator 或兼容 OpenAI API 的 AI 服务。</p>
+                            <p>PGS / VOBSUB 为图片字幕，无 OCR 时不适用；不提供语音识别或音频转写。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-translation-privacy">
+                        <summary><span>翻译会外发原文或产生费用吗？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>字幕翻译默认关闭，需自备 API key。启用后字幕原文外发到所选翻译服务，可能产生费用，请先确认额度。</p>
+                            <p>密钥仅在本机用 Windows DPAPI 加密，不参与设置备份；本机加密不阻止字幕原文外发。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-interpolation">
+                        <summary><span>补帧适用于哪些片源？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>补帧默认关闭，可选平滑插值或 CPU 运动补偿（minterpolate）。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion。</p>
+                            <p>可能增加卡顿、运动伪影与延迟，性能不足时建议关闭。不提供 SVP、RIFE 或 AI GPU 补帧。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-website">
+                        <summary><span>能在网页播放，或免账号使用吗？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>本站不提供网页播放、媒体内容或服务器账号。需安装桌面客户端，并登录有权访问的媒体服务器。</p>
+                            <p>MoviePilot 与第三方 API 需自行配置，账号与费用需自行确认。</p>
+                        </div>
+                    </details>
                 </div>
             </div>
         </section>
@@ -472,13 +477,13 @@
                             <small>媒体库客户端</small>
                         </span>
                     </a>
-                    <p>为 Windows 打造的原生媒体库客户端。集中浏览自己的片库，按偏好播放。</p>
+                    <p>集中浏览自己的片库，按偏好播放。</p>
                 </div>
                 <nav class="footer-links" aria-label="项目链接">
                     <div>
                         <p class="footer-title">项目</p>
                         <a href="https://github.com/cudamin/Momoka" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">版本下载</a>
+                        <a href="https://github.com/cudamin/Momoka/releases" target="_blank" rel="noopener noreferrer">客户端下载</a>
                         <a href="https://github.com/cudamin/Momoka/blob/master/PRIVACY.md" target="_blank" rel="noopener noreferrer">隐私政策</a>
                         <a href="https://github.com/cudamin/Momoka/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">MIT 许可证</a>
                     </div>
@@ -498,7 +503,7 @@
                     </div>
                 </nav>
             </div>
-            <p class="disclaimer">Momoka 是独立的第三方媒体库客户端，不提供、不托管、不索引任何媒体内容。与 Emby LLC、Jellyfin、飞牛影视、Plex、MoviePilot、TMDB、豆瓣、IMDb、Microsoft 等均无隶属、授权、赞助或背书关系。请仅使用你拥有合法权利或已获授权的内容。</p>
+            <p class="disclaimer">Momoka 是独立第三方客户端，不提供、不托管、不索引任何媒体内容，与所列服务和品牌无隶属、授权、赞助或背书关系。请仅使用拥有合法权利或已获授权的内容。</p>
             <div class="footer-bottom">
                 <p>© 2026 Momoka contributors · MIT License</p>
                 <a href="#top">回到顶部 ↑</a>

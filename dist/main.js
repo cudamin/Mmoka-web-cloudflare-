@@ -66,6 +66,38 @@
     syncHeader();
     window.addEventListener('scroll', syncHeader, { passive: true });
 
+    // Keep linked answers reachable even when the FAQ is initially collapsed.
+    function openFaq(hash) {
+        var id;
+        try {
+            id = decodeURIComponent(hash.slice(1));
+        } catch (error) {
+            return null;
+        }
+        var item = document.getElementById(id);
+        if (!item || !item.classList.contains('faq-item')) {
+            return null;
+        }
+        item.open = true;
+        item.classList.add('is-visible');
+        return item;
+    }
+
+    function revealFaqFragment() {
+        var item = openFaq(window.location.hash);
+        if (item) {
+            item.scrollIntoView({ block: 'start' });
+        }
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('a[href^="#faq-"]'), function (link) {
+        link.addEventListener('click', function () {
+            openFaq(link.hash);
+        });
+    });
+    revealFaqFragment();
+    window.addEventListener('hashchange', revealFaqFragment);
+
     var revealItems = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
