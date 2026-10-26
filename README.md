@@ -243,3 +243,39 @@ npx wrangler@latest deploy
 - 更新站点：同步源文件到 `dist/`，再执行一次 `npx wrangler@latest deploy`。
 - 不想用命令行的话，也可以在 Cloudflare 用 Pages 直接上传 `dist/` 文件夹，效果相同。
 
+## 弹幕凭据端点（`/api/danmaku/credential`）
+
+站点同时带上了 Momoka 内置弹幕凭据的下发端点，两种部署方式都支持：
+
+- **Workers**：`worker/index.js` 把 `GET /api/danmaku/credential` 交给 `worker/credential.js`，其余请求继续由 `ASSETS` 提供。
+- **Pages**：`functions/api/danmaku/credential.js` 是 Pages Function，复用同一个 `worker/credential.js`。
+
+它只下发 AES-GCM 加密的弹弹play 应用凭据，不代理搜索或弹幕请求。需要配置四个 Secret（不要写进仓库或 `dist/`）：
+
+```bash
+# Workers
+npx wrangler@latest secret put DANDANPLAY_APP_ID --name mmoka-web-cloudflare
+npx wrangler@latest secret put DANDANPLAY_APP_SECRET --name mmoka-web-cloudflare
+npx wrangler@latest secret put DANDANPLAY_CREDENTIAL_KEY --name mmoka-web-cloudflare
+npx wrangler@latest secret put DANDANPLAY_CREDENTIAL_KID --name mmoka-web-cloudflare
+
+# Pages（如果项目是 Pages）
+npx wrangler@latest pages secret put DANDANPLAY_APP_ID --project-name <项目名>
+npx wrangler@latest pages secret put DANDANPLAY_APP_SECRET --project-name <项目名>
+npx wrangler@latest pages secret put DANDANPLAY_CREDENTIAL_KEY --project-name <项目名>
+npx wrangler@latest pages secret put DANDANPLAY_CREDENTIAL_KID --project-name <项目名>
+```
+
+- `DANDANPLAY_APP_ID`／`DANDANPLAY_APP_SECRET`：弹弹play 开发者中心的应用凭据。
+- `DANDANPLAY_CREDENTIAL_KEY`：必须与客户端 `src/Momoka.Core/Danmaku/DandanPlayBuiltIn.cs` 里的 `Key` 完全相同（32 字节 base64）。
+- `DANDANPLAY_CREDENTIAL_KID`：任意短标识，例如 `momoka-2026-10`。
+
+部署后端点就是现有站点域名加 `/api/danmaku/credential`。验证：
+
+```bash
+node --test tests/danmaku-credential.test.mjs
+curl https://<站点域名>/api/danmaku/credential
+```
+
+应返回 `{"v":1,"kid":"...","exp":...,"data":"..."}`；503 表示 Secret 没配齐，404 表示项目没有加载到 Worker/Function。端点公开且凭据随客户端分发，建议在 Cloudflare 给这个路径加频率限制（例如 60 次/分钟/IP）。
+

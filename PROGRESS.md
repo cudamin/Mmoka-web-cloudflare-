@@ -84,3 +84,10 @@ Emby / Jellyfin      | 飞牛影视 / Plex（双列）
 - `node --check` 对两份测试及 main.js / dist/main.js / worker/index.js 通过；Python AST 对两份 Python 脚本通过，`git diff --check` 通过。本轮 8 个修改文件均 LF；CSS、原图片、运行 JavaScript、Workers / 部署配置无 diff。新 DOM 的最终验收仍交父窗口，不操作桌面或真实应用。
 - 本轮只提交网页准确状态，不把父窗口应用单测 / 自检或无并发对照通过当成最终发布绿；原生崩溃根因未明、应用发布仍暂缓。
 - 用户已授权网页仓库更新，但本轮更具体指令是先交 diff / SHA，等父窗口绿色 push main 指令；当前只本地提交，不 push、不 deploy。Cloudflare 真实部署未核验，不作上线承诺。
+
+## 2026-10-26 — 弹幕凭据端点（本地待推送）
+
+- 在现有官网仓库加入 `GET /api/danmaku/credential`：Workers 入口 `worker/index.js` 路由到 `worker/credential.js`；Pages Function `functions/api/danmaku/credential.js` 复用同一模块。静态站点与原有资源不变。
+- 端点从 `DANDANPLAY_APP_ID`、`DANDANPLAY_APP_SECRET`、`DANDANPLAY_CREDENTIAL_KEY`、`DANDANPLAY_CREDENTIAL_KID` 读取，AES-GCM 加密返回 7 天有效凭据；未配置返回 503，非 GET 返回 405。
+- 验证：`node --test tests/danmaku-credential.test.mjs` **5 项全过、0 失败**；`node --check` 三个 JS 文件通过。
+- **尚未推送、尚未部署、尚未配置真实 Secret**；线上端点与真实凭据未验证。客户端 `DandanPlayBuiltIn.Endpoint` 仍待按实际域名回填。
