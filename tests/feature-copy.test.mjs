@@ -131,7 +131,7 @@ function assertMetadata(markup) {
 
 function assertFaq(markup) {
     const questions = [...markup.matchAll(/<details class="faq-item reveal" id="([^"]+)"([^>]*)>([\s\S]*?)<\/details>/g)];
-    assert.deepEqual(questions.map(([, id]) => id), ['faq-subscriptions', 'faq-translation-formats', 'faq-translation-privacy', 'faq-interpolation', 'faq-website']);
+    assert.deepEqual(questions.map(([, id]) => id), ['faq-subscriptions', 'faq-danmaku', 'faq-translation-formats', 'faq-translation-privacy', 'faq-interpolation', 'faq-website']);
     for (const [, id, attrs, content] of questions) {
         assert.doesNotMatch(attrs, /\bopen\b/, 'FAQ should start collapsed: ' + id);
         assert.equal([...content.matchAll(/<summary>/g)].length, 1);
@@ -163,7 +163,9 @@ for (const [label, markup] of [['source', html], ['dist', deployed]]) {
         assert.match(subtitles, /翻译默认关闭.*字幕原文外发.*可能收费/);
         assert.match(blockOf(markup, 'li', 'frame-interpolation'), /补帧默认关闭.*8-bit SDR.*跳过 Motion.*卡顿.*伪影.*延迟/);
         const moviepilot = blockOf(markup, 'article', 'moviepilot');
-        assert.match(moviepilot, /MoviePilot.*需单独配置.*服务关闭或连接不可用时.*入口自动隐藏/);
+        assert.match(moviepilot, /MoviePilot.*需单独配置.*服务关闭或连接不可用时.*从属操作入口自动隐藏/);
+        assert.match(moviepilot, /媒体库、MoviePilot 订阅、MoviePilot 资源与 AniBT 四个来源入口始终显示.*不可用时显示恢复说明/);
+        assert.match(blockOf(markup, 'details', 'faq-subscriptions'), /搜索页来源栏始终显示.*阻止请求/);
     });
     test(label + ': official downloads stay neutral and avoid guessed assets', () => assertDownloads(markup));
 }

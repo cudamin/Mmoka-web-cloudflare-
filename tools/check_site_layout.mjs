@@ -54,9 +54,10 @@ async function checkPage(page, columns, width, errors) {
             .map(item => item.id || item.className || item.tagName);
         const cardTops = [...document.querySelectorAll('.server-card')].map(item => Math.round(item.getBoundingClientRect().top));
         const linkBottoms = [...document.querySelectorAll('.server-footer')].map(item => Math.round(item.getBoundingClientRect().bottom));
+        const featureWidths = [...document.querySelectorAll('.feature-list li')].map(item => Math.round(item.getBoundingClientRect().width));
         const badImages = [...document.images].filter(image => !image.complete || !image.naturalWidth).map(image => image.getAttribute('src'));
         const badTargets = [...document.querySelectorAll('a[href^="#"]')].filter(link => !document.getElementById(link.hash.slice(1))).map(link => link.hash);
-        return { documentWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth, height: document.documentElement.scrollHeight, servers: columnsOf('.server-grid'), features: columnsOf('.feature-list'), overflow, badImages, badTargets, faqOpen: [...document.querySelectorAll('.faq-item')].filter(item => item.open).length, cardTops, linkBottoms, text: document.body.innerText };
+        return { documentWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth, height: document.documentElement.scrollHeight, servers: columnsOf('.server-grid'), features: columnsOf('.feature-list'), featureWidths, overflow, badImages, badTargets, faqOpen: [...document.querySelectorAll('.faq-item')].filter(item => item.open).length, cardTops, linkBottoms, text: document.body.innerText };
     });
     assert.ok(layout.documentWidth <= layout.viewportWidth, 'Horizontal page overflow at ' + width);
     assert.deepEqual(layout.overflow, [], 'Component overflow at ' + width);
@@ -64,6 +65,8 @@ async function checkPage(page, columns, width, errors) {
     assert.deepEqual(layout.badTargets, [], 'Broken internal links');
     assert.equal(layout.servers, columns.servers, 'Wrong server card columns at ' + width);
     assert.equal(layout.features, columns.features, 'Wrong feature columns at ' + width);
+    assert.equal(layout.featureWidths.length, 6, 'Missing playback feature');
+    assert.ok(Math.max(...layout.featureWidths) - Math.min(...layout.featureWidths) <= 1, 'Playback entries should fill equal columns at ' + width);
     assert.equal(layout.faqOpen, 0, 'FAQ should be initially collapsed');
     assert.doesNotMatch(layout.text, /\bv?\d+\.\d+\.\d+\b|候选版|尚未提交|发布暂缓/);
     for (let index = 0; index < layout.cardTops.length; index++) {
@@ -145,7 +148,7 @@ async function main() {
         await page.keyboard.press('Space');
         assert.equal(await page.locator('#faq-translation-privacy').evaluate(element => element.open), false);
         report.checks.push({ name: 'keyboard-focus-and-native-faq-toggle', pass: true });
-        for (const [source, target] of [['#subtitles .feature-link', 'faq-translation-formats'], ['#frame-interpolation .feature-link', 'faq-interpolation'], ['#moviepilot .feature-link', 'faq-subscriptions']]) {
+        for (const [source, target] of [['#subtitles .feature-link', 'faq-translation-formats'], ['#frame-interpolation .feature-link', 'faq-interpolation'], ['#playback-controls .feature-link', 'faq-danmaku'], ['#moviepilot .feature-link', 'faq-subscriptions']]) {
             await page.goto(url, { waitUntil: 'networkidle' });
             await page.locator(source).click();
             assert.equal(new URL(page.url()).hash, '#' + target);

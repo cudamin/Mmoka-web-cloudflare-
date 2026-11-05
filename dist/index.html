@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momoka — Windows 原生媒体库客户端</title>
-    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
+    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <meta name="theme-color" content="#060a07">
     <meta property="og:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
+    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
+    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -19,14 +19,17 @@
         "name": "Momoka",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Windows 10 1809 及以上，仅 x64",
-        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，集中浏览多服务器片库，自定义画质、字幕和播放偏好。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。",
+        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。",
         "url": "https://github.com/cudamin/Momoka",
         "downloadUrl": "https://github.com/cudamin/Momoka/releases",
         "featureList": [
-            "多服务器、多账号聚合，统一浏览媒体库与续播。",
+            "多服务器、多账号聚合；主页缓存与逐排更新，普通媒体库返回时恢复原位置。",
+            "全季选集、图文季菜单与特别篇；长剧按需创建集卡。",
+            "电影、剧集与单集详情卡片分别排序和隐藏；可选亚克力控件、高斯背景与不透明度调节。",
             "着色器按片源与显卡档位匹配；支持字幕和视频版本筛选。",
-            "弹弹play 弹幕、播放快捷键，以及 Emby 提供的片头 / 片尾标记。",
-            "MoviePilot 可选连接，提供搜索、订阅与手动整理；服务不可用时隐藏相关入口。",
+            "弹弹play 弹幕或自部署 danmu_api，可合并来源；外观、密度与字幕避让可调，服务默认关闭。",
+            "可重绑播放快捷键；按 Emby、Jellyfin 或 Plex 提供的片头 / 片尾标记跳过，取决于服务端能力。",
+            "MoviePilot 搜索、订阅与手动整理，以及 AniBT 动漫资源搜索；需单独配置。搜索页来源入口始终显示，不可用时提供恢复说明。",
             "可选实时文字字幕翻译，保留原字幕；默认关闭，启用后原文外发至所选服务，可能收费。",
             "可选补帧，默认关闭；CPU 运动补偿仅适用于已识别的 8-bit SDR，可能增加卡顿、伪影与延迟。",
             "Emby 为主要支持；Jellyfin 与飞牛影视已实测原画播放和续播，部分管理操作未验证；Plex 仍为实验性。",
@@ -145,13 +148,21 @@
                         <li class="reveal" id="playback-controls">
                             <div>
                                 <h3>弹幕、快捷键与跳过片段</h3>
-                                <p>支持弹弹play 弹幕和播放快捷键；Emby 提供片头 / 片尾标记时，可按标记跳过。</p>
+                                <p>支持弹弹play 弹幕或自部署 danmu_api，也可合并来源。服务默认关闭；启用后可调字体、密度、透明度与字幕避让，播放页一键开关。</p>
+                                <p>播放快捷键可重绑，覆盖截图、音轨与字幕切换、逐帧等操作；Emby、Jellyfin 或 Plex 提供片头 / 片尾标记时，可按标记跳过。</p>
+                                <a class="feature-link" href="#faq-danmaku">弹幕来源与外观</a>
+                            </div>
+                        </li>
+                        <li class="reveal" id="episodes">
+                            <div>
+                                <h3>全季选集，特别篇单独查看</h3>
+                                <p>剧集与单集详情串起全季集列表，图文季菜单可跳到目标季，特别篇另列。长剧按需创建集卡，播放器内也能跨季选集。</p>
                             </div>
                         </li>
                         <li class="reveal" id="versions">
                             <div>
                                 <h3>优先播放想看的视频版本</h3>
-                                <p>默认将新入库版本排在前面，也可按文件名关键词设置优先级；聚合模式下可跨服务器选择。</p>
+                                <p>默认将新入库版本排在前面，也可按文件名关键词设置优先级；聚合模式下可跨服务器选择，版本菜单显示各份文件的体积。</p>
                             </div>
                         </li>
                     </ul>
@@ -190,9 +201,9 @@
                 <div class="section-head reveal">
                     <div>
                         <p class="eyebrow">原生界面</p>
-                        <h2 id="interface-title">五套深色主题</h2>
+                        <h2 id="interface-title">五套深色主题，详情布局由你决定</h2>
                     </div>
-                    <p class="section-lede">五套深色配色，搭配原生动画与可收起侧栏。</p>
+                    <p class="section-lede">墨绿、纯黑、午夜、石墨与紫夜，搭配原生动画、首页轮播与可收起侧栏。详情卡片、控件材质和背景效果也能按偏好调整。</p>
                 </div>
 
                 <div class="interface-grid">
@@ -247,6 +258,19 @@
                         <p class="theme-note">主题配色示意，并非应用截图；点击同步切换本站强调色。</p>
                         <p class="sr-only" role="status" id="theme-status">当前主题：墨绿</p>
                     </div>
+                </div>
+
+                <div class="aside-grid">
+                    <article class="aside-card reveal" id="detail-layout">
+                        <p class="eyebrow">详情页自定义</p>
+                        <h3>留下你想看的卡片</h3>
+                        <p>电影、剧集与单集详情分别保存卡片顺序和显示偏好。可选亚克力按钮与选择框、高斯模糊背景，并调节控件和背景的不透明度。</p>
+                    </article>
+                    <article class="aside-card reveal" id="navigation">
+                        <p class="eyebrow">主页与媒体库</p>
+                        <h3>返回片库，接着上次的位置</h3>
+                        <p>返回主页时先显示缓存，再在后台核对并逐排更新；普通媒体库从详情返回时恢复原来的卡片和滚动位置，背景图复用缓存。</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -312,7 +336,7 @@
                     <div>
                         <h3>多账号片库，一起浏览</h3>
                         <p>开启聚合模式，汇总在线账号的媒体库与最近添加，也可保留单账号模式。</p>
-                        <p class="aggregate-note">聚合模式默认关闭，可在「设置 → 服务器」中打开。</p>
+                        <p class="aggregate-note">聚合模式默认关闭，可在「设置 → 服务器」或顶部账号菜单中打开。</p>
                     </div>
                     <ul class="aggregate-list">
                         <li>
@@ -321,7 +345,7 @@
                         </li>
                         <li>
                             <span>账号</span>
-                            <p>添加服务器或账号时保留当前连接，切换来源不会丢失已保存的凭据。</p>
+                            <p>添加服务器或账号时保留当前连接，也可单独下线某个账号，保留已保存的凭据与连接偏好。</p>
                         </li>
                         <li>
                             <span>版本</span>
@@ -334,7 +358,8 @@
                     <article class="aside-card reveal" id="moviepilot">
                         <p class="eyebrow">MoviePilot · 可选集成</p>
                         <h3>搜索、订阅与整理</h3>
-                        <p>连接自己的 MoviePilot，搜索资源、管理订阅和手动整理。可选功能，需单独配置；服务关闭或连接不可用时，相关入口自动隐藏。</p>
+                        <p>连接自己的 MoviePilot，搜索资源、管理订阅和手动整理。可选功能，需单独配置；服务关闭或连接不可用时，从属操作入口自动隐藏。</p>
+                        <p>搜索页的媒体库、MoviePilot 订阅、MoviePilot 资源与 AniBT 四个来源入口始终显示；不可用时显示恢复说明，保留搜索内容。</p>
                         <a class="feature-link" href="#faq-subscriptions">订阅方式</a>
                     </article>
                     <article class="aside-card reveal">
@@ -430,7 +455,15 @@
                         <summary><span>电视剧和电影如何订阅？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
                         <div class="faq-answer">
                             <p>需连接自己的 MoviePilot。电视剧可按剧集组或季开启 / 关闭订阅，选择普通订阅、分集洗版或全集洗版。</p>
-                            <p>电影点击「订阅」，再次点击即可取消；服务不可用时相关入口隐藏。</p>
+                            <p>电影点击「订阅」，再次点击即可取消；服务不可用时相关入口隐藏。搜索页来源栏始终显示，不可用时提供恢复说明并阻止请求。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-danmaku">
+                        <summary><span>弹幕从哪里来，能调整哪些外观？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>弹幕服务默认关闭。弹弹play 使用 Momoka 内置应用凭据，无需填写 AppId 或 AppSecret；danmu_api 需要自己部署并填写地址，可合并两种来源。</p>
+                            <p>可调字体、字号、透明度、速度、密度和显示区域，支持随窗口缩放、字幕避让、防重叠、倍速同步和屏蔽词；播放页可随时开关，关闭保留偏好。</p>
+                            <p>搜索和自动匹配会将作品名称与集数发送到所选服务；合并来源会同时请求两端，并使用弹弹play 的共享额度。</p>
                         </div>
                     </details>
                     <details class="faq-item reveal" id="faq-translation-formats">
