@@ -1,5 +1,14 @@
 # 网站文案与布局优化
 
+## 2026-11-19 按当前客户端能力补齐媒体库、播放工具与预告片介绍
+
+- 本树 `C:/Users/89400/Momoka-site`，分支 `main`；起点为本地未推送的 `184e2fc`（远端 HEAD `1580517`），保留其全部改动。对照客户端 master `8e816d3` 的 README、`UiThemes.cs`、`AppSettings.cs` 及 `docs/音乐媒体库.md`、`docs/本机整理.md`、`docs/播放菜单与工具.md`、预告片与 SVP 说明逐项核对；未修改客户端或重新发布应用。
+- 新增「媒体库」分区（音乐库、本机整理、片库管理、AniBT）和播放区的「播放器与工具」「预告片」两张卡片；首屏功能目录、主导航与页脚同步加入口。补帧说明改为可接入本机 SVP（官方 mpvpipe 通道，Momoka 不安装、不修改 SVP 与 VapourSynth），删除「不提供 SVP、RIFE 或 AI GPU 补帧」的旧说法。首套主题按客户端改称「薄荷影院」，保留墨绿背景主视觉。
+- 新增 AniBT、本机整理、音乐库、播放工具、预告片五条 FAQ，补帧 FAQ 同步 SVP 条件；下载区补充 SVP、FFmpeg 等可选组件。Plex 音乐仍标协议适配、未实服核对；本地库明确只浏览、不在应用内播放；外部工具明确需自备，远程媒体先下载副本，Plex 多段文件隐藏工具。
+- 布局：播放列表 8 项维持两列；媒体库四卡两列，720 以下单列；首屏目录 6 项（960 三列、720 两列）；分区背景交替重排。`index.html` / `styles.css` / `main.js` 与 `dist/` 对应文件字节一致。
+- 验证：`node --test tests/*.test.mjs` **81/81**、失败 0、跳过 0；`py -3 -B tests/test_site_links.py` **20/20**；`py -3 -B tools/check_site_links.py --root .` 离线检查源/dist、锚点、资源与 14 个公开外链通过；`node tools/check_site_layout.mjs`（本机 Playwright + Edge）**14/14**，8 种宽度无横向或组件溢出，1440 / 720 / 390 整页、主题与展开 FAQ 截图已目视。未构建客户端、未连接真实服务器。
+- 交付：用户明确要求提交并推送 `main`；推送后核对远端 SHA。Cloudflare 生产部署与线上内容不在本轮核对范围，不以 Git 推送声称已上线。
+
 ## 2026-11-05 按近期客户端更新同步介绍
 
 - 本树 `C:/Users/89400/Momoka-site`，分支 main；从干净的旧副本快进至远端 `1580517` 后修改。参考主项目 master `63f02ab`（仅本地进度记录）及远端产品 `f4f1b60`，逐项读取 `Configuration/AppSettings.cs`、`DanmakuSettings.cs`、`SettingsViewModel.Danmaku.cs`、Jellyfin 媒体段实现、发布说明与主树交付记录。未修改客户端源码或重新发布应用。

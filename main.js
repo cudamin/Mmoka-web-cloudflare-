@@ -7,7 +7,7 @@
     var statusEl = document.getElementById('theme-status');
     var swatches = Array.prototype.slice.call(document.querySelectorAll('.swatch'));
     var themes = {
-        forest: '墨绿',
+        forest: '薄荷影院',
         black: '纯黑',
         midnight: '午夜',
         graphite: '石墨',

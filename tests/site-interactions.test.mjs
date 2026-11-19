@@ -83,8 +83,8 @@ function assertTheme(ui, theme) {
 test('default theme, readable fallback and initially collapsed FAQ remain available', () => {
     const ui = fixture();
     assertTheme(ui, 'forest');
-    assert.equal(ui.name.textContent, '墨绿');
-    assert.equal(ui.status.textContent, '当前主题：墨绿');
+    assert.equal(ui.name.textContent, '薄荷影院');
+    assert.equal(ui.status.textContent, '当前主题：薄荷影院');
     assert.equal(ui.faq.open, false);
     assert.ok(ui.faq.classList.contains('is-visible'));
     assert.equal(ui.window.__momokaReady, true);
@@ -92,7 +92,7 @@ test('default theme, readable fallback and initially collapsed FAQ remain availa
 
 test('theme changes update the page, preview, accessible state and persisted preference', () => {
     const ui = fixture();
-    const labels = ['墨绿', '纯黑', '午夜', '石墨', '紫夜'];
+    const labels = ['薄荷影院', '纯黑', '午夜', '石墨', '紫夜'];
     ui.swatches.forEach((button, index) => {
         button.emit('click');
         assertTheme(ui, themes[index]);

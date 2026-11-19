@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Momoka — Windows 原生媒体库客户端</title>
-    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
+    <meta name="description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、音乐库、本机整理、全季选集与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <meta name="theme-color" content="#060a07">
     <meta property="og:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
+    <meta property="og:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、音乐库、本机整理、全季选集与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Momoka — Windows 原生媒体库客户端">
-    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
+    <meta name="twitter:description" content="Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、音乐库、本机整理、全季选集与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -19,7 +19,7 @@
         "name": "Momoka",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Windows 10 1809 及以上，仅 x64",
-        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、全季选集、详情布局自定义与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。",
+        "description": "Momoka 是 Windows 原生媒体库客户端，采用 WinUI 3 与 libmpv，支持多账号聚合、音乐库、本机整理、全季选集与弹幕外观调节。支持范围因服务端而异，字幕翻译与补帧可选且默认关闭。",
         "url": "https://github.com/cudamin/Momoka",
         "downloadUrl": "https://github.com/cudamin/Momoka/releases",
         "featureList": [
@@ -30,8 +30,13 @@
             "弹弹play 弹幕或自部署 danmu_api，可合并来源；外观、密度与字幕避让可调，服务默认关闭。",
             "可重绑播放快捷键；按 Emby、Jellyfin 或 Plex 提供的片头 / 片尾标记跳过，取决于服务端能力。",
             "MoviePilot 搜索、订阅与手动整理，以及 AniBT 动漫资源搜索；需单独配置。搜索页来源入口始终显示，不可用时提供恢复说明。",
+            "音乐库统一界面与底部播放栏；歌曲为曲目表，专辑、艺术家与歌单为封面墙，播放页显示歌词。",
+            "本机整理支持本机或网络共享目录，按改名、硬链接或软链接入库；本地库只浏览，不在应用内播放。",
+            "片库管理支持多选批量、元数据与封面、字幕管理和遗漏集；不可用项按服务器能力隐藏。",
+            "播放器可嵌入主窗口、使用独立独占窗口或调用本机 mpv；播放工具支持片段、GIF、字幕同步、AI 字幕与章节导出。",
+            "预告片支持封面悬停与详情自动播放；YouTube 预告需登录，刮削与预告可共用代理。",
             "可选实时文字字幕翻译，保留原字幕；默认关闭，启用后原文外发至所选服务，可能收费。",
-            "可选补帧，默认关闭；CPU 运动补偿仅适用于已识别的 8-bit SDR，可能增加卡顿、伪影与延迟。",
+            "可选补帧，默认关闭；内置平滑插值与 CPU 运动补偿，也可接入本机 SVP；Motion 仅适用于已识别的 8-bit SDR，可能增加卡顿、伪影与延迟。",
             "Emby 为主要支持；Jellyfin 与飞牛影视已实测原画播放和续播，部分管理操作未验证；Plex 仍为实验性。",
             "本站不提供网页播放、媒体内容或服务器账号；需使用有权访问的账号，第三方服务账号与费用需自行确认。"
         ]
@@ -62,6 +67,7 @@
             </a>
             <nav class="site-nav" aria-label="主导航">
                 <a href="#player">播放</a>
+                <a href="#library">媒体库</a>
                 <a href="#interface">界面</a>
                 <a href="#servers">兼容性</a>
                 <a href="#download">下载</a>
@@ -104,6 +110,7 @@
             <div class="wrap">
                 <ul class="hero-strip" aria-label="功能概览">
                     <li><a href="#player">画质与补帧 <span aria-hidden="true">↗</span></a></li>
+                    <li><a href="#library">音乐与本机整理 <span aria-hidden="true">↗</span></a></li>
                     <li><a href="#aggregation">多账号聚合 <span aria-hidden="true">↗</span></a></li>
                     <li><a href="#subtitles">字幕与翻译 <span aria-hidden="true">↗</span></a></li>
                     <li><a href="#versions">版本筛选 <span aria-hidden="true">↗</span></a></li>
@@ -141,7 +148,7 @@
                         <li class="reveal" id="frame-interpolation">
                             <div>
                                 <h3>补帧按需开启</h3>
-                                <p>补帧默认关闭，可选平滑插值或 CPU 运动补偿。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion，可能增加卡顿、伪影和延迟。</p>
+                                <p>补帧默认关闭，可选平滑插值、CPU 运动补偿，或接入本机已装好的 SVP。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion，可能增加卡顿、伪影和延迟。</p>
                                 <a class="feature-link" href="#faq-interpolation">补帧适用范围</a>
                             </div>
                         </li>
@@ -163,6 +170,22 @@
                             <div>
                                 <h3>优先播放想看的视频版本</h3>
                                 <p>默认将新入库版本排在前面，也可按文件名关键词设置优先级；聚合模式下可跨服务器选择，版本菜单显示各份文件的体积。</p>
+                            </div>
+                        </li>
+                        <li class="reveal" id="player-tools">
+                            <div>
+                                <h3>播放器与工具</h3>
+                                <p>内置 libmpv 可嵌进主窗口，也可开独立独占窗口或改用本机 mpv.exe；独占模式可加载自定义 mpv.conf，集成模式下该项只读。</p>
+                                <p>在设置里指定本机 FFmpeg、ffsubsync/alass 或 faster-whisper，右键菜单可导出片段、GIF 与整份字幕，也能同步字幕、生成 AI 字幕或翻译整份字幕。</p>
+                                <p>这些程序由用户自备，Momoka 不安装或下载。</p>
+                                <a class="feature-link" href="#faq-tools">工具与限制</a>
+                            </div>
+                        </li>
+                        <li class="reveal" id="trailers">
+                            <div>
+                                <h3>预告片，悬停即看</h3>
+                                <p>封面悬停默认自动播放本地预告（静音、循环）；商店模式详情右上角自动播放预告。YouTube 预告需要登录时，提示条里可直接登录。</p>
+                                <a class="feature-link" href="#faq-trailers">预告来源与代理</a>
                             </div>
                         </li>
                     </ul>
@@ -196,14 +219,55 @@
             </div>
         </section>
 
-        <section class="section section-toned" id="interface" aria-labelledby="interface-title">
+        <section class="section section-toned" id="library" aria-labelledby="library-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="eyebrow">媒体库</p>
+                        <h2 id="library-title">从服务器到本机，片库和音乐一起管</h2>
+                    </div>
+                    <p class="section-lede">音乐库、本机整理与片库管理共用一套界面；能做什么按服务器能力、账号权限与本机配置显示。</p>
+                </div>
+
+                <div class="library-grid">
+                    <article class="aside-card reveal" id="music-library">
+                        <p class="eyebrow">音乐库</p>
+                        <h3>一套界面，四个音乐来源</h3>
+                        <p>Emby、Jellyfin 与飞牛音乐共用同一套界面和底部播放栏；歌曲是曲目表，专辑、艺术家和歌单是封面墙。Plex 为协议适配。</p>
+                        <p>播放页显示歌词：飞牛音乐读服务器歌词表，其他来源读音频文件标签。</p>
+                        <a class="feature-link" href="#faq-music">音乐库范围</a>
+                    </article>
+                    <article class="aside-card reveal" id="local-libraries">
+                        <p class="eyebrow">本机整理</p>
+                        <h3>把本地目录变成媒体库</h3>
+                        <p>本机磁盘或网络共享目录建成媒体库，用 TMDB 或 MoviePilot 识别，按改名、硬链接或软链接整理，可开启自动监控入库。</p>
+                        <p>本地库目前只浏览已入库内容，不在应用内播放。</p>
+                        <a class="feature-link" href="#faq-local">整理方式与限制</a>
+                    </article>
+                    <article class="aside-card reveal" id="library-management">
+                        <p class="eyebrow">片库管理</p>
+                        <h3>批量操作与条目编辑</h3>
+                        <p>媒体库列表可多选批量标记已看、收藏、加入合集或播放列表；条目菜单可改元数据、换封面、管理字幕、查看遗漏集。</p>
+                        <p>当前服务器不支持的项自动收起；标题栏的收藏页汇总在线账号的收藏。</p>
+                    </article>
+                    <article class="aside-card reveal" id="anibt">
+                        <p class="eyebrow">AniBT · 可选</p>
+                        <h3>番剧资源搜索与重新整理</h3>
+                        <p>搜索页固定有 AniBT 一栏，按番剧目录查资源、核对字幕组后交 MoviePilot 下载；需要先连接可用的 MoviePilot。入库的剧集与动画电影可按原文件名识别、重新整理。</p>
+                        <a class="feature-link" href="#faq-anibt">AniBT 使用条件</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="interface" aria-labelledby="interface-title">
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
                         <p class="eyebrow">原生界面</p>
                         <h2 id="interface-title">五套深色主题，详情布局由你决定</h2>
                     </div>
-                    <p class="section-lede">墨绿、纯黑、午夜、石墨与紫夜，搭配原生动画、首页轮播与可收起侧栏。详情卡片、控件材质和背景效果也能按偏好调整。</p>
+                    <p class="section-lede">薄荷影院、纯黑、午夜、石墨与紫夜，搭配原生动画、首页轮播与可收起侧栏。详情卡片、控件材质和背景效果也能按偏好调整。</p>
                 </div>
 
                 <div class="interface-grid">
@@ -224,7 +288,7 @@
                             </div>
                             <div class="preview-content">
                                 <p class="preview-kicker">深色主题</p>
-                                <p class="preview-headline">当前主题：<strong id="theme-name">墨绿</strong></p>
+                                <p class="preview-headline">当前主题：<strong id="theme-name">薄荷影院</strong></p>
                                 <p class="preview-text">收起侧栏，把更多空间留给片库。</p>
                                 <span class="preview-action" aria-hidden="true">播放</span>
                             </div>
@@ -236,7 +300,7 @@
                         <div class="swatches" role="group" aria-label="切换界面配色样本">
                             <button type="button" class="swatch" data-set-theme="forest" aria-pressed="true">
                                 <span class="swatch-dot" style="--swatch:#2f6b4f"></span>
-                                <span>墨绿<small>默认</small></span>
+                                <span>薄荷影院<small>默认</small></span>
                             </button>
                             <button type="button" class="swatch" data-set-theme="black" aria-pressed="false">
                                 <span class="swatch-dot" style="--swatch:#0b0b0b"></span>
@@ -256,7 +320,7 @@
                             </button>
                         </div>
                         <p class="theme-note">主题配色示意，并非应用截图；点击同步切换本站强调色。</p>
-                        <p class="sr-only" role="status" id="theme-status">当前主题：墨绿</p>
+                        <p class="sr-only" role="status" id="theme-status">当前主题：薄荷影院</p>
                     </div>
                 </div>
 
@@ -275,7 +339,7 @@
             </div>
         </section>
 
-        <section class="section" id="servers" aria-labelledby="servers-title">
+        <section class="section section-toned" id="servers" aria-labelledby="servers-title">
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
@@ -371,7 +435,7 @@
             </div>
         </section>
 
-        <section class="section section-toned" id="download" aria-labelledby="download-title">
+        <section class="section" id="download" aria-labelledby="download-title">
             <div class="wrap">
                 <div class="download-card reveal">
                     <div class="download-copy">
@@ -396,7 +460,7 @@
                             </div>
                             <div>
                                 <dt>可选组件</dt>
-                                <dd>MoviePilot（搜索、订阅与整理，需单独配置）</dd>
+                                <dd>MoviePilot（搜索、订阅与整理，需单独配置）；SVP、FFmpeg 等工具按需自备</dd>
                             </div>
                             <div>
                                 <dt>网页控制台</dt>
@@ -432,7 +496,7 @@
                                 <span class="step-number" aria-hidden="true">03</span>
                                 <div>
                                     <h4>设置播放偏好</h4>
-                                    <p>设置画质、字幕和视频版本优先级；补帧与翻译按需开启。</p>
+                                    <p>设置画质、字幕和视频版本优先级；补帧、翻译与播放工具按需开启。</p>
                                 </div>
                             </li>
                         </ol>
@@ -441,14 +505,14 @@
             </div>
         </section>
 
-        <section class="section" id="faq" aria-labelledby="faq-title">
+        <section class="section section-toned" id="faq" aria-labelledby="faq-title">
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
                         <p class="eyebrow">使用前先了解</p>
                         <h2 id="faq-title">常见问题</h2>
                     </div>
-                    <p class="section-lede">按需启用订阅、翻译与补帧，使用前了解限制。</p>
+                    <p class="section-lede">订阅、翻译、补帧与外部工具按需启用，使用前了解限制。</p>
                 </div>
                 <div class="faq-list">
                     <details class="faq-item reveal" id="faq-subscriptions">
@@ -456,6 +520,13 @@
                         <div class="faq-answer">
                             <p>需连接自己的 MoviePilot。电视剧可按剧集组或季开启 / 关闭订阅，选择普通订阅、分集洗版或全集洗版。</p>
                             <p>电影点击「订阅」，再次点击即可取消；服务不可用时相关入口隐藏。搜索页来源栏始终显示，不可用时提供恢复说明并阻止请求。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-anibt">
+                        <summary><span>AniBT 搜索和重新整理怎么用？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>AniBT 搜索页按番剧目录查资源，选定字幕组后交 MoviePilot 下载；需要先连接可用的 MoviePilot。</p>
+                            <p>入库的剧集与动画电影可按原文件名识别、重新整理；电影只对动画类型开放，结果需自行核对。</p>
                         </div>
                     </details>
                     <details class="faq-item reveal" id="faq-danmaku">
@@ -483,8 +554,36 @@
                     <details class="faq-item reveal" id="faq-interpolation">
                         <summary><span>补帧适用于哪些片源？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
                         <div class="faq-answer">
-                            <p>补帧默认关闭，可选平滑插值或 CPU 运动补偿（minterpolate）。Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion。</p>
-                            <p>可能增加卡顿、运动伪影与延迟，性能不足时建议关闭。不提供 SVP、RIFE 或 AI GPU 补帧。</p>
+                            <p>补帧默认关闭，可选平滑插值、CPU 运动补偿（minterpolate），或接入本机已装好的 SVP；SVP 走官方 mpvpipe 通道，Momoka 不安装、不修改 SVP 与 VapourSynth。</p>
+                            <p>Motion 仅用于已识别的 8-bit SDR；HDR / 高位深片源跳过 Motion。效果与开销取决于片源、显卡和 SVP 引擎，可能增加卡顿、伪影与延迟。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-local">
+                        <summary><span>本机整理会移动或改写文件吗？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>可选直接改名、硬链接或软链接；硬链接要求源和目标在同一本地卷，网络共享不支持，软链接可能要求开发者模式或额外权限。</p>
+                            <p>目标已有同名文件不覆盖；本地库目前只浏览已入库内容，不在应用内播放，也不触发远端服务器刷新。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-music">
+                        <summary><span>音乐库支持哪些服务器？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>Emby、Jellyfin 与飞牛音乐共用同一套界面和底部播放栏；Plex 为协议适配，未在真实服务器核对。</p>
+                            <p>歌词优先读服务器歌词表（飞牛音乐），其次读音频文件标签；CUE 分轨、ISO/SACD 与转码不在当前范围。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-tools">
+                        <summary><span>播放工具需要自己准备吗？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>需要本机的 FFmpeg / FFprobe；字幕同步用 ffsubsync 或 alass，AI 字幕用 faster-whisper。Momoka 不安装或下载这些程序。</p>
+                            <p>远程媒体会先下载完整副本再处理；Plex 多段文件隐藏外部工具。AI 字幕与整份翻译可能耗时或产生费用。</p>
+                        </div>
+                    </details>
+                    <details class="faq-item reveal" id="faq-trailers">
+                        <summary><span>预告片为什么需要登录或代理？</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+                        <div class="faq-answer">
+                            <p>封面悬停只播放服务器本地预告；商店模式详情右上角可自动播放本地或 YouTube 预告，可在设置 → 界面 → 预告片关闭。</p>
+                            <p>YouTube 预告需要登录时，详情页提示条里可直接登录；刮削与预告共用的代理在设置 → 关于 → 网络配置。</p>
                         </div>
                     </details>
                     <details class="faq-item reveal" id="faq-website">
@@ -529,6 +628,7 @@
                     <div>
                         <p class="footer-title">页面</p>
                         <a href="#player">播放</a>
+                        <a href="#library">媒体库</a>
                         <a href="#interface">界面</a>
                         <a href="#servers">兼容性</a>
                         <a href="#download">下载</a>

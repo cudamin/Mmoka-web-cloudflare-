@@ -521,7 +521,7 @@ h1 {
 
 .hero-strip {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 0 24px;
     margin: 0;
     padding: 4px 0;
@@ -1181,6 +1181,12 @@ h1 {
     margin-top: 16px;
 }
 
+.library-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
 .aside-card {
     min-width: 0;
     padding: 24px;
@@ -1205,6 +1211,10 @@ h1 {
     color: var(--muted);
     font-size: 14px;
     line-height: 1.8;
+}
+
+.aside-card p + p {
+    margin-top: 8px;
 }
 
 /* Download */
@@ -1694,13 +1704,10 @@ h1 {
         gap: 0 24px;
     }
 
-    .hero-strip li:last-child {
-        grid-column: 1 / -1;
-    }
-
     .feature-list,
     .server-grid,
-    .aside-grid {
+    .aside-grid,
+    .library-grid {
         grid-template-columns: 1fr;
     }
 

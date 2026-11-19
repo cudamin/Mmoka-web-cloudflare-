@@ -133,7 +133,7 @@ test('document stays balanced and retains navigation, hidden headings and contro
     assert.match(html, /<h1 id="hero-title" class="sr-only">/);
     assert.match(html, /<h2 id="player-title" class="sr-only">/);
     assert.deepEqual([...html.matchAll(/<section\b[^>]*id="([^"]+)"/g)].map(([, id]) => id),
-        ['top', 'player', 'interface', 'servers', 'download', 'faq']);
+        ['top', 'player', 'library', 'interface', 'servers', 'download', 'faq']);
     assert.equal([...html.matchAll(/data-set-theme="/g)].length, 5);
     assert.equal([...html.matchAll(/<article class="server-card reveal">/g)].length, 4);
 });
@@ -201,8 +201,8 @@ test('feature directory targets real sections and only setup steps are numbered'
     const directory = html.match(/<ul class="hero-strip"[^>]*>([\s\S]*?)<\/ul>/)?.[1];
     assert.ok(directory);
     assert.deepEqual([...directory.matchAll(/href="([^"]+)"/g)].map(([, href]) => href),
-        ['#player', '#aggregation', '#subtitles', '#versions', '#moviepilot']);
-    for (const id of ['aggregation', 'subtitles', 'versions', 'moviepilot']) {
+        ['#player', '#library', '#aggregation', '#subtitles', '#versions', '#moviepilot']);
+    for (const id of ['player', 'library', 'aggregation', 'subtitles', 'versions', 'moviepilot']) {
         assert.match(html, new RegExp(`id="${id}"`));
     }
     assert.doesNotMatch(html, /feature-num|01 \/ 播放|02 \/ 界面|03 \/ 兼容性|04 \/ 下载/);
@@ -242,9 +242,10 @@ test('responsive styles preserve focus, reduced motion and readable compatibilit
     assert.match(stylesheet, /\.server-grid\s*\{[^}]*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
     assert.match(stylesheet, /@media \(max-width: 1080px\)\s*\{\s*\.server-grid\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
     assert.match(stylesheet, /@media \(max-width: 720px\)/);
-    assert.match(stylesheet, /\.feature-list,\s*\.server-grid,\s*\.aside-grid\s*\{[^}]*grid-template-columns: 1fr/);
-    assert.match(stylesheet, /\.hero-strip\s*\{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
-    assert.match(stylesheet, /\.hero-strip li:last-child\s*\{[^}]*grid-column: 1 \/ -1/);
+    assert.match(stylesheet, /\.feature-list,\s*\.server-grid,\s*\.aside-grid,\s*\.library-grid\s*\{[^}]*grid-template-columns: 1fr/);
+    assert.match(stylesheet, /\.hero-strip\s*\{[^}]*grid-template-columns: repeat\(6, minmax\(0, 1fr\)\)/);
+    assert.match(stylesheet, /\.hero-strip\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+    assert.match(stylesheet, /\.library-grid\s*\{[^}]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
     assert.doesNotMatch(stylesheet, /\.download-mark|\.mark-glow|\.feature-num/);
 });
 

@@ -57,7 +57,7 @@ async function checkPage(page, columns, width, errors) {
         const featureWidths = [...document.querySelectorAll('.feature-list li')].map(item => Math.round(item.getBoundingClientRect().width));
         const badImages = [...document.images].filter(image => !image.complete || !image.naturalWidth).map(image => image.getAttribute('src'));
         const badTargets = [...document.querySelectorAll('a[href^="#"]')].filter(link => !document.getElementById(link.hash.slice(1))).map(link => link.hash);
-        return { documentWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth, height: document.documentElement.scrollHeight, servers: columnsOf('.server-grid'), features: columnsOf('.feature-list'), featureWidths, overflow, badImages, badTargets, faqOpen: [...document.querySelectorAll('.faq-item')].filter(item => item.open).length, cardTops, linkBottoms, text: document.body.innerText };
+        return { documentWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth, height: document.documentElement.scrollHeight, servers: columnsOf('.server-grid'), features: columnsOf('.feature-list'), libraries: columnsOf('.library-grid'), featureWidths, overflow, badImages, badTargets, faqOpen: [...document.querySelectorAll('.faq-item')].filter(item => item.open).length, cardTops, linkBottoms, text: document.body.innerText };
     });
     assert.ok(layout.documentWidth <= layout.viewportWidth, 'Horizontal page overflow at ' + width);
     assert.deepEqual(layout.overflow, [], 'Component overflow at ' + width);
@@ -65,7 +65,8 @@ async function checkPage(page, columns, width, errors) {
     assert.deepEqual(layout.badTargets, [], 'Broken internal links');
     assert.equal(layout.servers, columns.servers, 'Wrong server card columns at ' + width);
     assert.equal(layout.features, columns.features, 'Wrong feature columns at ' + width);
-    assert.equal(layout.featureWidths.length, 6, 'Missing playback feature');
+    assert.equal(layout.libraries, columns.libraries, 'Wrong library columns at ' + width);
+    assert.equal(layout.featureWidths.length, 8, 'Missing playback feature');
     assert.ok(Math.max(...layout.featureWidths) - Math.min(...layout.featureWidths) <= 1, 'Playback entries should fill equal columns at ' + width);
     assert.equal(layout.faqOpen, 0, 'FAQ should be initially collapsed');
     assert.doesNotMatch(layout.text, /\bv?\d+\.\d+\.\d+\b|候选版|尚未提交|发布暂缓/);
@@ -101,14 +102,14 @@ async function main() {
             return context;
         }
         const viewports = [
-            { width: 1440, height: 1000, servers: 4, features: 2 },
-            { width: 1280, height: 900, servers: 4, features: 2 },
-            { width: 1080, height: 900, servers: 2, features: 2 },
-            { width: 960, height: 900, servers: 2, features: 2 },
-            { width: 768, height: 1024, servers: 2, features: 2 },
-            { width: 720, height: 1000, servers: 1, features: 1 },
-            { width: 390, height: 844, servers: 1, features: 1 },
-            { width: 320, height: 800, servers: 1, features: 1 }
+            { width: 1440, height: 1000, servers: 4, features: 2, libraries: 2 },
+            { width: 1280, height: 900, servers: 4, features: 2, libraries: 2 },
+            { width: 1080, height: 900, servers: 2, features: 2, libraries: 2 },
+            { width: 960, height: 900, servers: 2, features: 2, libraries: 2 },
+            { width: 768, height: 1024, servers: 2, features: 2, libraries: 2 },
+            { width: 720, height: 1000, servers: 1, features: 1, libraries: 1 },
+            { width: 390, height: 844, servers: 1, features: 1, libraries: 1 },
+            { width: 320, height: 800, servers: 1, features: 1, libraries: 1 }
         ];
         for (const viewport of viewports) {
             const context = await localContext({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: 'reduce', deviceScaleFactor: 1 });
@@ -126,7 +127,7 @@ async function main() {
         const errors = [];
         page.on('pageerror', error => errors.push(error.message));
         await page.goto(url, { waitUntil: 'networkidle' });
-        const labels = { forest: '墨绿', black: '纯黑', midnight: '午夜', graphite: '石墨', violet: '紫夜' };
+        const labels = { forest: '薄荷影院', black: '纯黑', midnight: '午夜', graphite: '石墨', violet: '紫夜' };
         for (const [theme, label] of Object.entries(labels)) {
             await page.locator('[data-set-theme="' + theme + '"]').click();
             assert.equal(await page.locator('body').getAttribute('data-theme'), theme);
@@ -148,7 +149,7 @@ async function main() {
         await page.keyboard.press('Space');
         assert.equal(await page.locator('#faq-translation-privacy').evaluate(element => element.open), false);
         report.checks.push({ name: 'keyboard-focus-and-native-faq-toggle', pass: true });
-        for (const [source, target] of [['#subtitles .feature-link', 'faq-translation-formats'], ['#frame-interpolation .feature-link', 'faq-interpolation'], ['#playback-controls .feature-link', 'faq-danmaku'], ['#moviepilot .feature-link', 'faq-subscriptions']]) {
+        for (const [source, target] of [['#subtitles .feature-link', 'faq-translation-formats'], ['#frame-interpolation .feature-link', 'faq-interpolation'], ['#playback-controls .feature-link', 'faq-danmaku'], ['#player-tools .feature-link', 'faq-tools'], ['#trailers .feature-link', 'faq-trailers'], ['#music-library .feature-link', 'faq-music'], ['#local-libraries .feature-link', 'faq-local'], ['#anibt .feature-link', 'faq-anibt'], ['#moviepilot .feature-link', 'faq-subscriptions']]) {
             await page.goto(url, { waitUntil: 'networkidle' });
             await page.locator(source).click();
             assert.equal(new URL(page.url()).hash, '#' + target);

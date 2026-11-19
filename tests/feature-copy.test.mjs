@@ -75,7 +75,7 @@ function assertInterpolation(copy) {
     assert.match(copy, /Motion 仅用于已识别的 8-bit SDR/);
     assert.match(copy, /HDR\s*\/\s*高位深.*跳过 Motion/);
     for (const cost of ['卡顿', '伪影', '延迟']) assert.ok(copy.includes(cost), 'Missing interpolation cost: ' + cost);
-    assert.match(copy, /不提供 SVP、RIFE 或 AI GPU 补帧/);
+    assert.match(copy, /SVP.*mpvpipe.*Momoka 不安装/);
 }
 
 function assertDownloads(markup) {
@@ -126,12 +126,13 @@ function assertMetadata(markup) {
     assert.match(features, /字幕和视频版本筛选/);
     assert.match(features, /翻译.*默认关闭.*外发.*可能收费/);
     assert.match(features, /补帧.*默认关闭.*8-bit SDR.*卡顿.*伪影.*延迟/);
+    for (const keyword of ['音乐库', '本机整理', '片库管理', '播放工具', '预告片']) assert.ok(features.includes(keyword), 'Missing structured feature: ' + keyword);
     assertWebsiteBoundary(features);
 }
 
 function assertFaq(markup) {
     const questions = [...markup.matchAll(/<details class="faq-item reveal" id="([^"]+)"([^>]*)>([\s\S]*?)<\/details>/g)];
-    assert.deepEqual(questions.map(([, id]) => id), ['faq-subscriptions', 'faq-danmaku', 'faq-translation-formats', 'faq-translation-privacy', 'faq-interpolation', 'faq-website']);
+    assert.deepEqual(questions.map(([, id]) => id), ['faq-subscriptions', 'faq-anibt', 'faq-danmaku', 'faq-translation-formats', 'faq-translation-privacy', 'faq-interpolation', 'faq-local', 'faq-music', 'faq-tools', 'faq-trailers', 'faq-website']);
     for (const [, id, attrs, content] of questions) {
         assert.doesNotMatch(attrs, /\bopen\b/, 'FAQ should start collapsed: ' + id);
         assert.equal([...content.matchAll(/<summary>/g)].length, 1);
@@ -147,7 +148,7 @@ for (const [label, markup] of [['source', html], ['dist', deployed]]) {
     test(label + ': overview remains brief and existing media-version features remain', () => {
         const overview = markup.slice(markup.indexOf('<main'), markup.indexOf('<section class="section" id="faq"'));
         for (const [, paragraph] of overview.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)) assert.ok(stripTags(paragraph).length <= 125, 'Overview paragraph is too long');
-        for (const feature of ['弹弹play 弹幕', '播放快捷键', '片头 / 片尾标记', '多账号聚合', '版本筛选', '手动整理']) assert.ok(pageText(markup).includes(feature), 'Missing existing feature: ' + feature);
+        for (const feature of ['弹弹play 弹幕', '播放快捷键', '片头 / 片尾标记', '多账号聚合', '版本筛选', '手动整理', '音乐库', '本机整理', '播放工具', '预告片']) assert.ok(pageText(markup).includes(feature), 'Missing existing feature: ' + feature);
         assert.match(markup, /id="versions"/);
     });
     test(label + ': concise, initially collapsed FAQ preserves all detailed conditions', () => {
@@ -197,7 +198,7 @@ const regressions = [
     ['lost default-off privacy', () => assertPrivacy(blockOf(html.replace('字幕翻译默认关闭，需自备', '字幕翻译默认开启，需自备'), 'details', 'faq-translation-privacy')), /默认关闭/],
     ['keys included in backups', () => assertPrivacy(blockOf(html.replace('不参与设置备份', '参与设置备份'), 'details', 'faq-translation-privacy')), /不参与设置备份/],
     ['overbroad HDR motion support', () => assertInterpolation(blockOf(html.replaceAll('HDR / 高位深片源跳过 Motion', 'HDR / 高位深也强制 Motion'), 'details', 'faq-interpolation')), /跳过 Motion/],
-    ['AI GPU interpolation promise', () => assertInterpolation(blockOf(html.replace('不提供 SVP、RIFE 或 AI GPU 补帧', '提供 SVP、RIFE 或 AI GPU 补帧'), 'details', 'faq-interpolation')), /不提供/],
+    ['SVP bundled as an app feature', () => assertInterpolation(blockOf(html.replace('SVP 走官方 mpvpipe 通道，Momoka 不安装', 'SVP 由 Momoka 内置'), 'details', 'faq-interpolation')), /mpvpipe|不安装/],
     ['wrong Store product', () => assertDownloads(html.replace('9NQJL7K0H8X0', 'INVALID_PRODUCT')), /Expected values/],
     ['web playback promise', () => assertWebsiteBoundary(blockOf(html.replaceAll('本站不提供网页播放、媒体内容或服务器账号', '本站提供网页播放、媒体内容及服务器账号'), 'details', 'faq-website')), /不提供网页播放/],
     ['missing accessible summary', () => assertFaq(html.replace('<summary>', '<div>')), /Expected values/],
